@@ -45,7 +45,7 @@ class ExamenTipoDataTable extends DataTable
      */
     public function query(ExamenTipo $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['grupo']);
     }
 
     /**
@@ -97,7 +97,8 @@ class ExamenTipoDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('grupo_id'),
+            Column::make('id'),
+            Column::make('grupo')->data('grupo.nombre')->name('grupo.nombre'),
             Column::make('codigo'),
             Column::make('nombre')
         ];

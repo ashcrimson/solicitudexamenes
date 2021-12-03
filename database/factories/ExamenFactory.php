@@ -5,7 +5,11 @@
 use App\Models\Examen;
 use Faker\Generator as Faker;
 
-$factory->define(Examen::class, function (Faker $faker) {
+$autoIncrement = autoIncrementFaker();
+
+$factory->define(Examen::class, function (Faker $faker) use ($autoIncrement){
+
+    $autoIncrement->next();
 
     return [
         'paciente_id' => $this->faker->word,

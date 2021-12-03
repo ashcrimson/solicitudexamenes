@@ -5,14 +5,17 @@
 use App\Models\ExamenTipo;
 use Faker\Generator as Faker;
 
-$factory->define(ExamenTipo::class, function (Faker $faker) {
+$autoIncrement = autoIncrementFaker();
+
+$factory->define(ExamenTipo::class, function (Faker $faker) use ($autoIncrement){
+
+    $autoIncrement->next();
 
     return [
-        'grupo_id' => $this->faker->word,
-        'codigo' => $this->faker->word,
-        'nombre' => $this->faker->word,
+        'grupo_id' => \App\Models\ExamenGrupo::all()->random()->id,
+        'codigo' => "codigo ".$autoIncrement->current(),
+        'nombre' => "Examen ".$autoIncrement->current(),
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s'),
-        'deleted_at' => $this->faker->date('Y-m-d H:i:s')
     ];
 });
