@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Examen
  * @package App\Models
- * @version December 3, 2021, 5:34 pm CST
+ * @version December 3, 2021, 5:44 pm CST
  *
  * @property \App\Models\User $userSolicita
  * @property \App\Models\Diagnostico $diagnostico
@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $user_solicita
  * @property integer $user_realiza
  * @property string|\Carbon\Carbon $fecha_realiza
+ * @property string $muestras
+ * @property string $rutina_urgencia
  * @property string $notas
  * @property integer $estado_id
  */
@@ -45,6 +47,8 @@ class Examen extends Model
         'user_solicita',
         'user_realiza',
         'fecha_realiza',
+        'muestras',
+        'rutina_urgencia',
         'notas',
         'estado_id'
     ];
@@ -62,6 +66,8 @@ class Examen extends Model
         'user_solicita' => 'integer',
         'user_realiza' => 'integer',
         'fecha_realiza' => 'datetime',
+        'muestras' => 'string',
+        'rutina_urgencia' => 'string',
         'notas' => 'string',
         'estado_id' => 'integer'
     ];
@@ -78,6 +84,8 @@ class Examen extends Model
         'user_solicita' => 'required',
         'user_realiza' => 'required',
         'fecha_realiza' => 'nullable',
+        'muestras' => 'nullable|string|max:255',
+        'rutina_urgencia' => 'nullable|string|max:255',
         'notas' => 'nullable|string',
         'estado_id' => 'required',
         'created_at' => 'nullable',

@@ -103,6 +103,8 @@ class ExamenDataTable extends DataTable
             Column::make('user_solicita'),
             Column::make('user_realiza'),
             Column::make('fecha_realiza'),
+            Column::make('muestras'),
+            Column::make('rutina_urgencia'),
             Column::make('notas'),
             Column::make('estado_id')
         ];

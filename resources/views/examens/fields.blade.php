@@ -52,6 +52,18 @@
     </script>
 @endsection
 
+<!-- Muestras Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('muestras', 'Muestras:') !!}
+    {!! Form::text('muestras', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
+<!-- Rutina Urgencia Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('rutina_urgencia', 'Rutina Urgencia:') !!}
+    {!! Form::text('rutina_urgencia', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
 <!-- Notas Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('notas', 'Notas:') !!}

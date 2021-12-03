@@ -14,6 +14,8 @@ $factory->define(Examen::class, function (Faker $faker) {
         'user_solicita' => $this->faker->word,
         'user_realiza' => $this->faker->word,
         'fecha_realiza' => $this->faker->date('Y-m-d H:i:s'),
+        'muestras' => $this->faker->word,
+        'rutina_urgencia' => $this->faker->word,
         'notas' => $this->faker->text,
         'estado_id' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),

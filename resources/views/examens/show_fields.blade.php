@@ -28,6 +28,16 @@
 {!! $examen->fecha_realiza !!}<br>
 
 
+<!-- Muestras Field -->
+{!! Form::label('muestras', 'Muestras:') !!}
+{!! $examen->muestras !!}<br>
+
+
+<!-- Rutina Urgencia Field -->
+{!! Form::label('rutina_urgencia', 'Rutina Urgencia:') !!}
+{!! $examen->rutina_urgencia !!}<br>
+
+
 <!-- Notas Field -->
 {!! Form::label('notas', 'Notas:') !!}
 {!! $examen->notas !!}<br>
