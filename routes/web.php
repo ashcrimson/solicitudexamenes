@@ -49,6 +49,19 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('projects', 'ProjectController');
 
+
+    Route::resource('examenGrupos', 'ExamenGrupoController');
+
+    Route::resource('examenTipos', 'ExamenTipoController');
+
+    Route::resource('pacientes', 'PacienteController');
+
+    Route::resource('diagnosticos', 'DiagnosticoController');
+
+    Route::resource('examenEstados', 'ExamenEstadosController');
+
+    Route::resource('examens', 'ExamenController');
 });
+
 
 

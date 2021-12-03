@@ -16,7 +16,20 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
         Route::get('user/add/shortcut/{user}', 'UserAPIController@addShortcut')->name('users.add_shortcut');
         Route::get('user/remove/shortcut/{user}', 'UserAPIController@removeShortcut')->name('users.remove_shortcut');
 
+
+        Route::resource('examen_grupos', 'ExamenGrupoAPIController');
+
+        Route::resource('examen_tipos', 'ExamenTipoAPIController');
+
+        Route::resource('pacientes', 'PacienteAPIController');
+
+        Route::resource('diagnosticos', 'DiagnosticoAPIController');
+
+        Route::resource('examen_estados', 'ExamenEstadosAPIController');
+
+        Route::resource('examens', 'ExamenAPIController');
     });
 
 
 });
+
