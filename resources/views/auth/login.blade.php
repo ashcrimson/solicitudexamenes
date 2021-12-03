@@ -6,13 +6,14 @@
 
     <div class="login-box">
         <div class="login-logo text-dark text-uppercase text-bold"  >
-            <a href="{{ route('home') }}"><b style="color: black !important;">{{ config('app.name', 'Laravel') }}</b></a>
+            <p><img src="{{asset('dist/img/Logo HNV.png')}}" alt=""></p>
+            <a href="{{ route('home') }}"><b style="color: black !important;">SOLICITUD EXAMENES</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
 
-{{--                @include('layouts.partials.request_errors')--}}
+                {{--                @include('layouts.partials.request_errors')--}}
 
                 <p class="login-box-msg">{{__("Sign in to start your session")}}</p>
 
@@ -41,28 +42,28 @@
 
                     </div>
 
-{{--                    <div class="input-group mb-3">--}}
+                    {{--                    <div class="input-group mb-3">--}}
 
-{{--                        <input id="username" type="username"--}}
-{{--                               class="form-control @error('username') is-invalid @enderror"--}}
-{{--                               name="username" value="{{ old('username') }}"--}}
-{{--                               required autocomplete="username" autofocus--}}
-{{--                               placeholder="{{__('Username')}}">--}}
-{{--                        <div class="input-group-append">--}}
-{{--                            <div class="input-group-text">--}}
-{{--                                <span class="fas fa-user"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-
-{{--                        @error('username')--}}
-{{--                        <span class="invalid-feedback" role="alert">--}}
-{{--                            <strong>{{ $message }}</strong>--}}
-{{--                        </span>--}}
-{{--                        @enderror--}}
+                    {{--                        <input id="username" type="username"--}}
+                    {{--                               class="form-control @error('username') is-invalid @enderror"--}}
+                    {{--                               name="username" value="{{ old('username') }}"--}}
+                    {{--                               required autocomplete="username" autofocus--}}
+                    {{--                               placeholder="{{__('Username')}}">--}}
+                    {{--                        <div class="input-group-append">--}}
+                    {{--                            <div class="input-group-text">--}}
+                    {{--                                <span class="fas fa-user"></span>--}}
+                    {{--                            </div>--}}
+                    {{--                        </div>--}}
 
 
-{{--                    </div>--}}
+                    {{--                        @error('username')--}}
+                    {{--                        <span class="invalid-feedback" role="alert">--}}
+                    {{--                            <strong>{{ $message }}</strong>--}}
+                    {{--                        </span>--}}
+                    {{--                        @enderror--}}
+
+
+                    {{--                    </div>--}}
                     <div class="input-group mb-3">
                         <input id="password" type="password"
                                class="form-control @error('password') is-invalid @enderror"
@@ -101,9 +102,6 @@
                         <!-- /.col -->
                     </div>
                 </form>
-
-
-                @include('partials.social_links')
 
 
                 <p class="mb-1">
