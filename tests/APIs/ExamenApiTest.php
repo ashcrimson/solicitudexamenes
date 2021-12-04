@@ -19,7 +19,7 @@ class ExamenApiTest extends TestCase
 
         $this->response = $this->json(
             'POST',
-            '/api/examens', $examen
+            '/api/examenes', $examen
         );
 
         $this->assertApiResponse($examen);
@@ -34,7 +34,7 @@ class ExamenApiTest extends TestCase
 
         $this->response = $this->json(
             'GET',
-            '/api/examens/'.$examen->id
+            '/api/examenes/'.$examen->id
         );
 
         $this->assertApiResponse($examen->toArray());
@@ -50,7 +50,7 @@ class ExamenApiTest extends TestCase
 
         $this->response = $this->json(
             'PUT',
-            '/api/examens/'.$examen->id,
+            '/api/examenes/'.$examen->id,
             $editedExamen
         );
 
@@ -66,13 +66,13 @@ class ExamenApiTest extends TestCase
 
         $this->response = $this->json(
             'DELETE',
-             '/api/examens/'.$examen->id
+             '/api/examenes/'.$examen->id
          );
 
         $this->assertApiSuccess();
         $this->response = $this->json(
             'GET',
-            '/api/examens/'.$examen->id
+            '/api/examenes/'.$examen->id
         );
 
         $this->response->assertStatus(404);

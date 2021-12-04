@@ -17,7 +17,7 @@ class ExamenGrupo extends Model
     use SoftDeletes;
 
     public $table = 'examen_grupos';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -55,7 +55,7 @@ class ExamenGrupo extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function examenTipos()
+    public function tipos()
     {
         return $this->hasMany(\App\Models\ExamenTipo::class, 'grupo_id');
     }

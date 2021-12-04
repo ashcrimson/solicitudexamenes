@@ -23,14 +23,14 @@ class ExamenDataTable extends DataTable
 
                  $id = $examen->id;
 
-                 return view('examens.datatables_actions',compact('examen','id'))->render();
+                 return view('examenes.datatables_actions',compact('examen','id'))->render();
              })
              ->editColumn('id',function (Examen $examen){
 
                  return $examen->id;
 
                  //se debe crear la vista modal_detalles
-                 //return view('examens.modal_detalles',compact('examen'))->render();
+                 //return view('examenes.modal_detalles',compact('examen'))->render();
 
              })
              ->rawColumns(['action','id']);

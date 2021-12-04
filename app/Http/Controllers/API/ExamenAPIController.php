@@ -18,7 +18,7 @@ class ExamenAPIController extends AppBaseController
 {
     /**
      * Display a listing of the Examen.
-     * GET|HEAD /examens
+     * GET|HEAD /examenes
      *
      * @param Request $request
      * @return Response
@@ -41,7 +41,7 @@ class ExamenAPIController extends AppBaseController
 
     /**
      * Store a newly created Examen in storage.
-     * POST /examens
+     * POST /examenes
      *
      * @param CreateExamenAPIRequest $request
      *
@@ -59,7 +59,7 @@ class ExamenAPIController extends AppBaseController
 
     /**
      * Display the specified Examen.
-     * GET|HEAD /examens/{id}
+     * GET|HEAD /examenes/{id}
      *
      * @param int $id
      *
@@ -79,7 +79,7 @@ class ExamenAPIController extends AppBaseController
 
     /**
      * Update the specified Examen in storage.
-     * PUT/PATCH /examens/{id}
+     * PUT/PATCH /examenes/{id}
      *
      * @param int $id
      * @param UpdateExamenAPIRequest $request
@@ -103,7 +103,7 @@ class ExamenAPIController extends AppBaseController
 
     /**
      * Remove the specified Examen from storage.
-     * DELETE /examens/{id}
+     * DELETE /examenes/{id}
      *
      * @param int $id
      *

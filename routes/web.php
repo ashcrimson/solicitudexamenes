@@ -60,7 +60,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('examenEstados', 'ExamenEstadosController');
 
-    Route::resource('examens', 'ExamenController');
+    Route::resource('examenes', 'ExamenController');
+    Route::get('mis/solicitudes', 'ExamenController@listUser')->name('examenes.user');
 });
 
 

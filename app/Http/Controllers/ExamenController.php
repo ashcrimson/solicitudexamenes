@@ -7,6 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateExamenRequest;
 use App\Http\Requests\UpdateExamenRequest;
 use App\Models\Examen;
+use App\Models\ExamenGrupo;
+use App\Models\ExamenTipo;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -30,7 +32,12 @@ class ExamenController extends AppBaseController
      */
     public function index(ExamenDataTable $examenDataTable)
     {
-        return $examenDataTable->render('examens.index');
+        return $examenDataTable->render('examenes.laboratorio.index');
+    }
+
+    public function listUser(ExamenDataTable $examenDataTable)
+    {
+        return $examenDataTable->render('examenes.index');
     }
 
     /**
@@ -40,7 +47,9 @@ class ExamenController extends AppBaseController
      */
     public function create()
     {
-        return view('examens.create');
+        $grupos = ExamenGrupo::with('tipos')->get();
+
+        return view('examenes.create',compact('grupos'));
     }
 
     /**
@@ -59,7 +68,7 @@ class ExamenController extends AppBaseController
 
         Flash::success('Examen guardado exitosamente.');
 
-        return redirect(route('examens.index'));
+        return redirect(route('examenes.index'));
     }
 
     /**
@@ -77,10 +86,10 @@ class ExamenController extends AppBaseController
         if (empty($examen)) {
             Flash::error('Examen no encontrado');
 
-            return redirect(route('examens.index'));
+            return redirect(route('examenes.index'));
         }
 
-        return view('examens.show')->with('examen', $examen);
+        return view('examenes.show')->with('examen', $examen);
     }
 
     /**
@@ -98,10 +107,10 @@ class ExamenController extends AppBaseController
         if (empty($examen)) {
             Flash::error('Examen no encontrado');
 
-            return redirect(route('examens.index'));
+            return redirect(route('examenes.index'));
         }
 
-        return view('examens.edit')->with('examen', $examen);
+        return view('examenes.edit')->with('examen', $examen);
     }
 
     /**
@@ -120,7 +129,7 @@ class ExamenController extends AppBaseController
         if (empty($examen)) {
             Flash::error('Examen no encontrado');
 
-            return redirect(route('examens.index'));
+            return redirect(route('examenes.index'));
         }
 
         $examen->fill($request->all());
@@ -128,7 +137,7 @@ class ExamenController extends AppBaseController
 
         Flash::success('Examen actualizado con éxito.');
 
-        return redirect(route('examens.index'));
+        return redirect(route('examenes.index'));
     }
 
     /**
@@ -148,13 +157,13 @@ class ExamenController extends AppBaseController
         if (empty($examen)) {
             Flash::error('Examen no encontrado');
 
-            return redirect(route('examens.index'));
+            return redirect(route('examenes.index'));
         }
 
         $examen->delete();
 
         Flash::success('Examen deleted successfully.');
 
-        return redirect(route('examens.index'));
+        return redirect(route('examenes.index'));
     }
 }
