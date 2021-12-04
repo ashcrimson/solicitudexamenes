@@ -15,8 +15,8 @@ class CreateExamenTiposTable extends Migration
     {
         Schema::create('examen_tipos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('grupo_id')->index('fk_examen_tipos_examen_grupos1_idx');
-            $table->string('codigo', 45)->unique('codigo_UNIQUE');
+            $table->unsignedBigInteger('grupo_id')->index('fk_tipo_grupo_idx1');
+            $table->string('codigo')->unique();
             $table->string('nombre');
             $table->timestamps();
             $table->softDeletes();

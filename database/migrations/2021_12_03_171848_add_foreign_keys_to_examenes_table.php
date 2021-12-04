@@ -14,11 +14,11 @@ class AddForeignKeysToExamenesTable extends Migration
     public function up()
     {
         Schema::table('examenes', function (Blueprint $table) {
-            $table->foreign('user_solicita', 'fk_examenes_users')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('diagnostico_id', 'fk_examenes_diagnosticos1')->references('id')->on('diagnosticos')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('paciente_id', 'fk_examenes_pacientes1')->references('id')->on('pacientes')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('user_realiza', 'fk_examenes_users1')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('estado_id', 'fk_examenes_examen_estados1')->references('id')->on('examen_estados')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('user_solicita', 'fk_examenes_users')->references('id')->on('users');
+            $table->foreign('diagnostico_id', 'fk_examenes_diagnosticos1')->references('id')->on('diagnosticos');
+            $table->foreign('paciente_id', 'fk_examenes_pacientes1')->references('id')->on('pacientes');
+            $table->foreign('user_realiza', 'fk_examenes_users1')->references('id')->on('users');
+            $table->foreign('estado_id', 'fk_examenes_examen_estados1')->references('id')->on('examen_estados');
         });
     }
 

@@ -15,7 +15,7 @@ class CreateExamenGruposTable extends Migration
     {
         Schema::create('examen_grupos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre')->unique('nombre_UNIQUE');
+            $table->string('nombre')->unique();
             $table->timestamps();
             $table->softDeletes();
         });

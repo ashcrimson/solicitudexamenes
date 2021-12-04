@@ -14,9 +14,9 @@ class CreateTiposHasExamenTable extends Migration
     public function up()
     {
         Schema::create('tipos_has_examen', function (Blueprint $table) {
-            $table->unsignedBigInteger('tipo_id')->index('fk_examen_tipos_has_examenes_examen_tipos1_idx');
-            $table->unsignedBigInteger('examen_id')->index('fk_examen_tipos_has_examenes_examenes1_idx');
-            $table->primary(['tipo_id', 'examen_id']);
+            $table->unsignedBigInteger('tipo_id')->index('fk_tipos_has_examen_idx1');
+            $table->unsignedBigInteger('examen_id')->index('fk_tipos_has_examen_idx2');
+            $table->primary(['tipo_id', 'examen_id'],'pk_tipos_has_examen');
         });
     }
 
