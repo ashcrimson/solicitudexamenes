@@ -31,7 +31,7 @@ class Examen extends Model
     use SoftDeletes;
 
     public $table = 'examenes';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -136,7 +136,7 @@ class Examen extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      **/
-    public function examenTipos()
+    public function tipos()
     {
         return $this->belongsToMany(\App\Models\ExamenTipo::class, 'tipos_has_examen');
     }

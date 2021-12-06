@@ -20,7 +20,7 @@ class ExamenTipo extends Model
     use SoftDeletes;
 
     public $table = 'examen_tipos';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -74,6 +74,11 @@ class ExamenTipo extends Model
      **/
     public function examenes()
     {
-        return $this->belongsToMany(\App\Models\Examene::class, 'tipos_has_examen');
+        return $this->belongsToMany(\App\Models\Examen::class, 'tipos_has_examen');
+    }
+
+    public function getTextAttribute()
+    {
+        return $this->codigo." / ".$this->nombre." (".$this->grupo->nombre.")";
     }
 }

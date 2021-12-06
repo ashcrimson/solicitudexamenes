@@ -25,6 +25,11 @@ class ExamenDataTable extends DataTable
 
                  return view('examenes.datatables_actions',compact('examen','id'))->render();
              })
+           ->editColumn('paciente.nombre_completo',function (Examen $examen){
+
+               return $examen->paciente->nombre_completo;
+
+           })
              ->editColumn('id',function (Examen $examen){
 
                  return $examen->id;
@@ -45,7 +50,7 @@ class ExamenDataTable extends DataTable
      */
     public function query(Examen $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['paciente','diagnostico','estado']);
     }
 
     /**
@@ -97,16 +102,28 @@ class ExamenDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('paciente_id'),
-            Column::make('diagnostico_id'),
-            Column::make('fecha_programa'),
+            Column::make('id'),
+            Column::make('paciente')->name('paciente.nombre_completo')->data('paciente.nombre_completo')
+                ->searchable(false)->orderable(false),
+            Column::make('diagnostico')->name('diagnostico.nombre')->data('diagnostico.nombre'),
             Column::make('user_solicita'),
-            Column::make('user_realiza'),
-            Column::make('fecha_realiza'),
             Column::make('muestras'),
             Column::make('rutina_urgencia'),
-            Column::make('notas'),
-            Column::make('estado_id')
+            Column::make('estado')->data('estado.nombre')->name('estado.nombre'),
+
+
+            Column::make('paciente.apellido_paterno')
+                ->visible(false)
+                ->exportable(false),
+            Column::make('paciente.apellido_materno')
+                ->visible(false)->exportable(false),
+            Column::make('paciente.primer_nombre')
+                ->visible(false)->exportable(false),
+            Column::make('paciente.segundo_nombre')
+                ->visible(false)->exportable(false),
+
+
+
         ];
     }
 
