@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\ExamenEstados;
+use App\Models\ExamenEstado;
 use Faker\Generator as Faker;
 
-$factory->define(ExamenEstados::class, function (Faker $faker) {
+$factory->define(ExamenEstado::class, function (Faker $faker) {
 
     return [
         'nombre' => $this->faker->word,

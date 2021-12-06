@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\ExamenEstados;
+use App\Models\ExamenEstado;
 use InfyOm\Generator\Request\APIRequest;
 
 class CreateExamenEstadosAPIRequest extends APIRequest
@@ -24,6 +24,6 @@ class CreateExamenEstadosAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return ExamenEstados::$rules;
+        return ExamenEstado::$rules;
     }
 }

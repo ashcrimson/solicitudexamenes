@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateExamenEstadosAPIRequest;
 use App\Http\Requests\API\UpdateExamenEstadosAPIRequest;
-use App\Models\ExamenEstados;
+use App\Models\ExamenEstado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -17,7 +17,7 @@ use Response;
 class ExamenEstadosAPIController extends AppBaseController
 {
     /**
-     * Display a listing of the ExamenEstados.
+     * Display a listing of the ExamenEstado.
      * GET|HEAD /examenEstados
      *
      * @param Request $request
@@ -25,7 +25,7 @@ class ExamenEstadosAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $query = ExamenEstados::query();
+        $query = ExamenEstado::query();
 
         if ($request->get('skip')) {
             $query->skip($request->get('skip'));
@@ -40,7 +40,7 @@ class ExamenEstadosAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created ExamenEstados in storage.
+     * Store a newly created ExamenEstado in storage.
      * POST /examenEstados
      *
      * @param CreateExamenEstadosAPIRequest $request
@@ -51,14 +51,14 @@ class ExamenEstadosAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var ExamenEstados $examenEstados */
-        $examenEstados = ExamenEstados::create($input);
+        /** @var ExamenEstado $examenEstados */
+        $examenEstados = ExamenEstado::create($input);
 
         return $this->sendResponse($examenEstados->toArray(), 'Examen Estados guardado exitosamente');
     }
 
     /**
-     * Display the specified ExamenEstados.
+     * Display the specified ExamenEstado.
      * GET|HEAD /examenEstados/{id}
      *
      * @param int $id
@@ -67,8 +67,8 @@ class ExamenEstadosAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var ExamenEstados $examenEstados */
-        $examenEstados = ExamenEstados::find($id);
+        /** @var ExamenEstado $examenEstados */
+        $examenEstados = ExamenEstado::find($id);
 
         if (empty($examenEstados)) {
             return $this->sendError('Examen Estados no encontrado');
@@ -78,7 +78,7 @@ class ExamenEstadosAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified ExamenEstados in storage.
+     * Update the specified ExamenEstado in storage.
      * PUT/PATCH /examenEstados/{id}
      *
      * @param int $id
@@ -88,8 +88,8 @@ class ExamenEstadosAPIController extends AppBaseController
      */
     public function update($id, UpdateExamenEstadosAPIRequest $request)
     {
-        /** @var ExamenEstados $examenEstados */
-        $examenEstados = ExamenEstados::find($id);
+        /** @var ExamenEstado $examenEstados */
+        $examenEstados = ExamenEstado::find($id);
 
         if (empty($examenEstados)) {
             return $this->sendError('Examen Estados no encontrado');
@@ -98,11 +98,11 @@ class ExamenEstadosAPIController extends AppBaseController
         $examenEstados->fill($request->all());
         $examenEstados->save();
 
-        return $this->sendResponse($examenEstados->toArray(), 'ExamenEstados actualizado con éxito');
+        return $this->sendResponse($examenEstados->toArray(), 'ExamenEstado actualizado con éxito');
     }
 
     /**
-     * Remove the specified ExamenEstados from storage.
+     * Remove the specified ExamenEstado from storage.
      * DELETE /examenEstados/{id}
      *
      * @param int $id
@@ -113,8 +113,8 @@ class ExamenEstadosAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var ExamenEstados $examenEstados */
-        $examenEstados = ExamenEstados::find($id);
+        /** @var ExamenEstado $examenEstados */
+        $examenEstados = ExamenEstado::find($id);
 
         if (empty($examenEstados)) {
             return $this->sendError('Examen Estados no encontrado');

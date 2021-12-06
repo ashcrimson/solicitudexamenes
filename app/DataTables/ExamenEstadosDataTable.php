@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\ExamenEstados;
+use App\Models\ExamenEstado;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
@@ -19,13 +19,13 @@ class ExamenEstadosDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-       return $dataTable->addColumn('action', function(ExamenEstados $examenEstados){
+       return $dataTable->addColumn('action', function(ExamenEstado $examenEstados){
 
                  $id = $examenEstados->id;
 
                  return view('examen_estados.datatables_actions',compact('examenEstados','id'))->render();
              })
-             ->editColumn('id',function (ExamenEstados $examenEstados){
+             ->editColumn('id',function (ExamenEstado $examenEstados){
 
                  return $examenEstados->id;
 
@@ -40,10 +40,10 @@ class ExamenEstadosDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\ExamenEstados $model
+     * @param \App\Models\ExamenEstado $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(ExamenEstados $model)
+    public function query(ExamenEstado $model)
     {
         return $model->newQuery();
     }

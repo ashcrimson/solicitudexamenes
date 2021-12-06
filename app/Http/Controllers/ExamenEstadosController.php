@@ -6,7 +6,7 @@ use App\DataTables\ExamenEstadosDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateExamenEstadosRequest;
 use App\Http\Requests\UpdateExamenEstadosRequest;
-use App\Models\ExamenEstados;
+use App\Models\ExamenEstado;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -23,7 +23,7 @@ class ExamenEstadosController extends AppBaseController
     }
 
     /**
-     * Display a listing of the ExamenEstados.
+     * Display a listing of the ExamenEstado.
      *
      * @param ExamenEstadosDataTable $examenEstadosDataTable
      * @return Response
@@ -34,7 +34,7 @@ class ExamenEstadosController extends AppBaseController
     }
 
     /**
-     * Show the form for creating a new ExamenEstados.
+     * Show the form for creating a new ExamenEstado.
      *
      * @return Response
      */
@@ -44,7 +44,7 @@ class ExamenEstadosController extends AppBaseController
     }
 
     /**
-     * Store a newly created ExamenEstados in storage.
+     * Store a newly created ExamenEstado in storage.
      *
      * @param CreateExamenEstadosRequest $request
      *
@@ -54,8 +54,8 @@ class ExamenEstadosController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var ExamenEstados $examenEstados */
-        $examenEstados = ExamenEstados::create($input);
+        /** @var ExamenEstado $examenEstados */
+        $examenEstados = ExamenEstado::create($input);
 
         Flash::success('Examen Estados guardado exitosamente.');
 
@@ -63,7 +63,7 @@ class ExamenEstadosController extends AppBaseController
     }
 
     /**
-     * Display the specified ExamenEstados.
+     * Display the specified ExamenEstado.
      *
      * @param  int $id
      *
@@ -71,8 +71,8 @@ class ExamenEstadosController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var ExamenEstados $examenEstados */
-        $examenEstados = ExamenEstados::find($id);
+        /** @var ExamenEstado $examenEstados */
+        $examenEstados = ExamenEstado::find($id);
 
         if (empty($examenEstados)) {
             Flash::error('Examen Estados no encontrado');
@@ -84,7 +84,7 @@ class ExamenEstadosController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified ExamenEstados.
+     * Show the form for editing the specified ExamenEstado.
      *
      * @param  int $id
      *
@@ -92,8 +92,8 @@ class ExamenEstadosController extends AppBaseController
      */
     public function edit($id)
     {
-        /** @var ExamenEstados $examenEstados */
-        $examenEstados = ExamenEstados::find($id);
+        /** @var ExamenEstado $examenEstados */
+        $examenEstados = ExamenEstado::find($id);
 
         if (empty($examenEstados)) {
             Flash::error('Examen Estados no encontrado');
@@ -105,7 +105,7 @@ class ExamenEstadosController extends AppBaseController
     }
 
     /**
-     * Update the specified ExamenEstados in storage.
+     * Update the specified ExamenEstado in storage.
      *
      * @param  int              $id
      * @param UpdateExamenEstadosRequest $request
@@ -114,8 +114,8 @@ class ExamenEstadosController extends AppBaseController
      */
     public function update($id, UpdateExamenEstadosRequest $request)
     {
-        /** @var ExamenEstados $examenEstados */
-        $examenEstados = ExamenEstados::find($id);
+        /** @var ExamenEstado $examenEstados */
+        $examenEstados = ExamenEstado::find($id);
 
         if (empty($examenEstados)) {
             Flash::error('Examen Estados no encontrado');
@@ -132,7 +132,7 @@ class ExamenEstadosController extends AppBaseController
     }
 
     /**
-     * Remove the specified ExamenEstados from storage.
+     * Remove the specified ExamenEstado from storage.
      *
      * @param  int $id
      *
@@ -142,8 +142,8 @@ class ExamenEstadosController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var ExamenEstados $examenEstados */
-        $examenEstados = ExamenEstados::find($id);
+        /** @var ExamenEstado $examenEstados */
+        $examenEstados = ExamenEstado::find($id);
 
         if (empty($examenEstados)) {
             Flash::error('Examen Estados no encontrado');

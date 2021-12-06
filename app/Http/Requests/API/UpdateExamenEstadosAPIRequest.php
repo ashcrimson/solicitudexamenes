@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\ExamenEstados;
+use App\Models\ExamenEstado;
 use InfyOm\Generator\Request\APIRequest;
 
 class UpdateExamenEstadosAPIRequest extends APIRequest
@@ -24,8 +24,8 @@ class UpdateExamenEstadosAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = ExamenEstados::$rules;
-        
+        $rules = ExamenEstado::$rules;
+
         return $rules;
     }
 }

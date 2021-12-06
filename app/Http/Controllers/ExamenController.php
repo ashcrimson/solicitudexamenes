@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateExamenRequest;
 use App\Models\Examen;
 use App\Models\ExamenGrupo;
 use App\Models\ExamenTipo;
+use App\Models\Paciente;
+use Carbon\Carbon;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -166,4 +168,56 @@ class ExamenController extends AppBaseController
 
         return redirect(route('examenes.index'));
     }
+
+    public function creaOactualizaPaciente($request)
+    {
+        $paciente = Paciente::updateOrCreate([
+            'run' => $request->run,
+            'dv_run' => $request->dv_run,
+
+        ],[
+            'run' => $request->run,
+            'fecha_nac' => $request->fecha_nac,
+            'dv_run' => $request->dv_run,
+            'apellido_paterno' => $request->apellido_paterno,
+            'apellido_materno' => $request->apellido_materno,
+            'primer_nombre' => $request->primer_nombre,
+            'segundo_nombre' => $request->segundo_nombre,
+
+            'sexo' => $request->sexo ? 'M' : 'F',
+
+            'direccion' => $request->direccion,
+            'familiar_responsable' => $request->familiar_responsable,
+            'telefono' => $request->telefono,
+            'telefono2' => $request->telefono2,
+            'prevision_id' => $request->prevision_id,
+            'clave' => $request->clave,
+            'movil_envia' => $request->movil_envia,
+
+        ]);
+
+        return $paciente;
+    }
+
+    public function addAttributos(Examen $examen)
+    {
+
+        $examen->setAttribute("run" ,$examen->paciente->run);
+        $examen->setAttribute("dv_run" ,$examen->paciente->dv_run);
+        $examen->setAttribute("apellido_paterno" ,$examen->paciente->apellido_paterno);
+        $examen->setAttribute("apellido_materno" ,$examen->paciente->apellido_materno);
+        $examen->setAttribute("primer_nombre" ,$examen->paciente->primer_nombre);
+        $examen->setAttribute("segundo_nombre" ,$examen->paciente->segundo_nombre);
+        $examen->setAttribute("fecha_nac" ,Carbon::parse($examen->paciente->fecha_nac)->format('Y-m-d'));
+        $examen->setAttribute("sexo" ,$examen->paciente->sexo == 'M' ? 1 : 0);
+
+        $examen->setAttribute("direccion" ,$examen->paciente->direccion);
+        $examen->setAttribute("familiar_responsable" ,$examen->paciente->familiar_responsable);
+        $examen->setAttribute("telefono" ,$examen->paciente->telefono);
+        $examen->setAttribute("telefono2" ,$examen->paciente->telefono2);
+
+
+        return $examen;
+    }
+
 }

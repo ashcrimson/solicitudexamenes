@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\ExamenEstados;
+use App\Models\ExamenEstado;
 
 class UpdateExamenEstadosRequest extends FormRequest
 {
@@ -25,8 +25,8 @@ class UpdateExamenEstadosRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = ExamenEstados::$rules;
-        
+        $rules = ExamenEstado::$rules;
+
         return $rules;
     }
 }

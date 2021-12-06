@@ -14,7 +14,7 @@ class CreateExamenEstadosTable extends Migration
     public function up()
     {
         Schema::create('examen_estados', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary();
+            $table->id();
             $table->string('nombre')->unique();
             $table->timestamps();
             $table->softDeletes();

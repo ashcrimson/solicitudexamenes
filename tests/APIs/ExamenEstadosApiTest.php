@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\ExamenEstados;
+use App\Models\ExamenEstado;
 
 class ExamenEstadosApiTest extends TestCase
 {
@@ -15,7 +15,7 @@ class ExamenEstadosApiTest extends TestCase
      */
     public function test_create_examen_estados()
     {
-        $examenEstados = factory(ExamenEstados::class)->make()->toArray();
+        $examenEstados = factory(ExamenEstado::class)->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -30,7 +30,7 @@ class ExamenEstadosApiTest extends TestCase
      */
     public function test_read_examen_estados()
     {
-        $examenEstados = factory(ExamenEstados::class)->create();
+        $examenEstados = factory(ExamenEstado::class)->create();
 
         $this->response = $this->json(
             'GET',
@@ -45,8 +45,8 @@ class ExamenEstadosApiTest extends TestCase
      */
     public function test_update_examen_estados()
     {
-        $examenEstados = factory(ExamenEstados::class)->create();
-        $editedExamenEstados = factory(ExamenEstados::class)->make()->toArray();
+        $examenEstados = factory(ExamenEstado::class)->create();
+        $editedExamenEstados = factory(ExamenEstado::class)->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
@@ -62,7 +62,7 @@ class ExamenEstadosApiTest extends TestCase
      */
     public function test_delete_examen_estados()
     {
-        $examenEstados = factory(ExamenEstados::class)->create();
+        $examenEstados = factory(ExamenEstado::class)->create();
 
         $this->response = $this->json(
             'DELETE',
