@@ -54,7 +54,9 @@
                             <td>{{ $tipo->codigo }}</td>
                             <td>
                                 <div >
-                                    <input type="checkbox"  id="customCheck1" name="tipos[]" value="{{$tipo->id}}" >
+                                    <input type="checkbox"  id="customCheck1" name="tipos[]" value="{{$tipo->id}}"
+                                        {{in_array($tipo->id,$examen->tipos->pluck('id')->toArray() ?? []) ? 'checked' : ''}}
+                                    >
                                     <label for="customCheck1"></label>
                                 </div>
                             </td>

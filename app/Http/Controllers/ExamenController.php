@@ -146,7 +146,12 @@ class ExamenController extends AppBaseController
             return redirect(route('examenes.index'));
         }
 
-        return view('examenes.edit')->with('examen', $examen);
+        $examen = $this->addAttributos($examen);
+
+        $grupos = ExamenGrupo::with('tipos')->get();
+
+
+        return view('examenes.edit',compact('examen','grupos'));
     }
 
     /**
