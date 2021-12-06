@@ -11,6 +11,11 @@
     .table tr th,td{
         font-size: 12px;
     }
+
+    .carta {
+        height: 400px;
+        overflow: scroll;
+    }
 </style>
 
 <div class="col-12">
@@ -37,7 +42,7 @@
 <div class="row">
     @foreach($grupos as $grupo)
         <div class="col-4">
-            <div class="card">
+            <div class="card carta">
                 <h3 class="card-title titulocarta" style="text-align: center;">{{$grupo->nombre}}</h3>
                 <table class="table table-bordered">
                     <thead>
