@@ -7,12 +7,15 @@ use App\Http\Requests;
 use App\Http\Requests\CreateExamenRequest;
 use App\Http\Requests\UpdateExamenRequest;
 use App\Models\Examen;
+use App\Models\ExamenEstado;
 use App\Models\ExamenGrupo;
 use App\Models\ExamenTipo;
 use App\Models\Paciente;
 use Carbon\Carbon;
+use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class ExamenController extends AppBaseController
@@ -63,14 +66,45 @@ class ExamenController extends AppBaseController
      */
     public function store(CreateExamenRequest $request)
     {
-        $input = $request->all();
 
-        /** @var Examen $examen */
-        $examen = Examen::create($input);
+        try {
+            DB::beginTransaction();
+
+            $this->procesaStore($request);
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
+
 
         Flash::success('Examen guardado exitosamente.');
 
         return redirect(route('examenes.index'));
+    }
+
+    public function procesaStore(CreateExamenRequest $request)
+    {
+
+        /**
+         * @var Paciente $paciente
+         */
+        $paciente = $this->creaOactualizaPaciente($request);
+
+        $request->merge([
+            'paciente_id' => $paciente->id,
+            'user_solicita' => auth()->user()->id,
+            'estado_id' => ExamenEstado::INGRESADO
+        ]);
+
+        /** @var Examen $examen */
+        $examen = Examen::create($request->all());
+
+        $examen->tipos()->sync($request->tipos ?? []);
+
     }
 
     /**

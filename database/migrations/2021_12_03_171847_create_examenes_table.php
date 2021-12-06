@@ -19,7 +19,7 @@ class CreateExamenesTable extends Migration
             $table->unsignedBigInteger('diagnostico_id')->index('fk_examene_diagnosticos1_idx');
             $table->dateTime('fecha_programa')->nullable();
             $table->unsignedBigInteger('user_solicita')->index('fk_examene_users_idx');
-            $table->unsignedBigInteger('user_realiza')->index('fk_examene_users1_idx');
+            $table->unsignedBigInteger('user_realiza')->nullable()->index('fk_examene_users1_idx');
             $table->dateTime('fecha_realiza')->nullable();
             $table->string('muestras')->nullable();
             $table->string('rutina_urgencia')->nullable();

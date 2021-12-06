@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \App\Models\Paciente $paciente
  * @property \App\Models\User $userRealiza
  * @property \App\Models\ExamenEstado $estado
- * @property \Illuminate\Database\Eloquent\Collection $examenTipos
+ * @property \Illuminate\Database\Eloquent\Collection $tipos
  * @property integer $paciente_id
  * @property integer $diagnostico_id
  * @property string|\Carbon\Carbon $fecha_programa
@@ -78,19 +78,10 @@ class Examen extends Model
      * @var array
      */
     public static $rules = [
-        'paciente_id' => 'required',
         'diagnostico_id' => 'required',
-        'fecha_programa' => 'nullable',
-        'user_solicita' => 'required',
-        'user_realiza' => 'required',
-        'fecha_realiza' => 'nullable',
         'muestras' => 'nullable|string|max:255',
         'rutina_urgencia' => 'nullable|string|max:255',
         'notas' => 'nullable|string',
-        'estado_id' => 'required',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
     ];
 
     /**
@@ -138,6 +129,6 @@ class Examen extends Model
      **/
     public function tipos()
     {
-        return $this->belongsToMany(\App\Models\ExamenTipo::class, 'tipos_has_examen');
+        return $this->belongsToMany(\App\Models\ExamenTipo::class, 'tipos_has_examen','examen_id','tipo_id');
     }
 }

@@ -74,7 +74,7 @@ class ExamenTipo extends Model
      **/
     public function examenes()
     {
-        return $this->belongsToMany(\App\Models\Examen::class, 'tipos_has_examen');
+        return $this->belongsToMany(\App\Models\Examen::class, 'tipos_has_examen','examen_id','tipo_id');
     }
 
     public function getTextAttribute()
