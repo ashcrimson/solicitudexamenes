@@ -52,24 +52,47 @@ class UsersTableSeeder extends Seeder
 
         });
 
+
         User::factory(1)->create([
-            "username" => "Tester",
-            "name" => "Tester",
+            "username" => "Medico1",
+            "name" => "Medico",
             "password" => bcrypt("123")
         ])->each(function (User $user){
-            $user->syncRoles(Role::TESTER);
-            $user->options()->sync(Option::pluck('id')->toArray());
-            $user->shortcuts()->sync([3,4,5,6]);
+            $user->syncRoles(Role::MEDICO);
+//            $user->shortcuts()->sync([3,4,5,6]);
 
         });
 
-        User::factory(6)->create([
+        User::factory(1)->create([
+            "username" => "Medico2",
+            "name" => "Medico 2",
             "password" => bcrypt("123")
         ])->each(function (User $user){
-            $user->syncRoles(Role::USER);
-            $user->options()->sync(Option::pluck('id')->toArray());
-            $user->shortcuts()->sync([3,4,5,6]);
+            $user->syncRoles(Role::MEDICO);
+            //            $user->shortcuts()->sync([3,4,5,6]);
 
         });
+
+        User::factory(1)->create([
+            "username" => "Medico3",
+            "name" => "Medico 3",
+            "password" => bcrypt("123")
+        ])->each(function (User $user){
+            $user->syncRoles(Role::MEDICO);
+            //            $user->shortcuts()->sync([3,4,5,6]);
+
+        });
+
+        User::factory(1)->create([
+
+            "username" => "Tecnico",
+            "name" => "Técnico",
+            "password" => bcrypt("123")
+        ])->each(function (User $user){
+            $user->syncRoles(Role::TECNICO);
+//            $user->shortcuts()->sync([3,4,5,6]);
+
+        });
+
     }
 }
