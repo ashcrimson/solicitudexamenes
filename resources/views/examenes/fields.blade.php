@@ -34,62 +34,81 @@
     </div>
 </div>
 
-<div class="row">
-    @foreach($grupos as $grupo)
-        <div class="col-4">
-            <div class="card">
-                <h3 class="card-title titulocarta" style="text-align: center;">{{$grupo->nombre}}</h3>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th scope="col">Código</th>
-                        <th scope="col"></th>
-                        <th scope="col">Examen</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($grupo->tipos as $tipo)
 
+<div id="fieldsExamen">
+
+    <div class="row">
+        @foreach($grupos as $grupo)
+            <div class="col-4">
+                <div class="card">
+                    <h3 class="card-title titulocarta" style="text-align: center;">{{$grupo->nombre}}</h3>
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <td>{{ $tipo->codigo }}</td>
-                            <td>
-                                <div >
-                                    <input type="checkbox"  id="customCheck1" name="tipos[]" value="{{$tipo->id}}"
-                                        {{in_array($tipo->id,isset($examen) ? $examen->tipos->pluck('id')->toArray() : []) ? 'checked' : ''}}
-                                    >
-                                    <label for="customCheck1"></label>
-                                </div>
-                            </td>
-                            <td>{{ $tipo->nombre }}</td>
+                            <th scope="col">Código</th>
+                            <th scope="col"></th>
+                            <th scope="col">Examen</th>
                         </tr>
-                    @endforeach
+                        </thead>
+                        <tbody>
+                        @foreach ($grupo->tipos as $tipo)
 
-                    </tbody>
-                </table>
+                            <tr>
+                                <td>{{ $tipo->codigo }}</td>
+                                <td>
+                                    <div >
+                                        <input type="checkbox"  id="customCheck1" name="tipos[]" value="{{$tipo->id}}"
+                                            {{in_array($tipo->id,isset($examen) ? $examen->tipos->pluck('id')->toArray() : []) ? 'checked' : ''}}
+                                        >
+                                        <label for="customCheck1"></label>
+                                    </div>
+                                </td>
+                                <td>{{ $tipo->nombre }}</td>
+                            </tr>
+                        @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
+
+    <div class="form-group col-sm-6">
+        <select-diagnostico
+            label="Diagnostico"
+            v-model="diagnostico" >
+
+        </select-diagnostico>
+    </div>
+
+    <!-- Notas Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('notas', 'Notas:') !!}
+        {!! Form::text('notas', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Programacion Field -->
+    <div class="form-group col-sm-6">
+        <label for="hora_de_llamada">Programación:</label>
+        <input class="form-control" name="hora_de_llamada" type="datetime-local" id="hora_de_llamada">
+    </div>
 </div>
 
-<div class="form-group col-sm-12">
-    {!! Form::label('name', 'Diagnostico:') !!}
-    {!!
-        Form::select(
-            'diagnostico_id',
-            select(\App\Models\Diagnostico::class,'nombre','id',null,null)
-            , null
-            , ['id'=>'diagnosticos','multiple','class' => 'form-control select2-simple']
-        )
-    !!}
-</div>
-<!-- Notas Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('notas', 'Notas:') !!}
-    {!! Form::text('notas', null, ['class' => 'form-control']) !!}
-</div>
+@push('scripts')
+<script>
+    const app = new Vue({
+        el: '#fieldsExamen',
+        name: '#fieldsExamen',
+        created() {
 
-<!-- Programacion Field -->
-<div class="form-group col-sm-6">
-    <label for="hora_de_llamada">Programación:</label>
-    <input class="form-control" name="hora_de_llamada" type="datetime-local" id="hora_de_llamada">
-</div>
+        },
+        data: {
+            diagnostico : @json($examen->diagnostico ?? null),
+        },
+        methods: {
+
+        }
+    });
+</script>
+@endpush

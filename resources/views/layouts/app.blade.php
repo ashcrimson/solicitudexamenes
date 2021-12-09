@@ -37,10 +37,10 @@
 
 
 
-    @include('layouts.partials.navbar')
-    @include('layouts.partials.sidebar')
+@include('layouts.partials.navbar')
+@include('layouts.partials.sidebar')
 
-    <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @can('access_option')
             @yield('content')
@@ -51,13 +51,14 @@
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-        <strong>
+    <!-- <strong>
             Copyright &copy; 2014-{{anioActual()}}
-        </strong>
-        All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.0.0
-        </div>
+        <a href="https://solucionesaltamirano.com/">Soluciones Altamirano</a>.
+    </strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.0.0
+    </div> -->
     </footer>
 
     <!-- Control Sidebar -->
@@ -70,7 +71,7 @@
 
 
 {{--Para utilizar las rutas en java script https://github.com/tighten/ziggy--}}
-{{--@routes--}}
+@routes
 
 @include('partials.flash_alert')
 
@@ -82,7 +83,7 @@
 
 <script>
     @if(appIsDebug())
-        logW("Modo Debug Activo")
+    logW("Modo Debug Activo")
     @else
         logConfig.stopLogging = true;
     @endif
@@ -116,6 +117,21 @@
         })
 
     }
+
+    $(function () {
+
+        $(".wait-on-submit").submit(function( event ) {
+
+            Swal.fire({
+                title: 'Espera por favor...',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                timerProgressBar: true,
+            });
+
+            Swal.showLoading();
+        });
+    })
 
 </script>
 

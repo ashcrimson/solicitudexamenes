@@ -7,14 +7,14 @@ use Faker\Generator as Faker;
 
 $autoIncrement = autoIncrementFaker();
 
-
-$factory->define(Diagnostico::class, function (Faker $faker) use ($autoIncrement){
+$factory->define(Diagnostico::class, function (Faker $faker) use ($autoIncrement) {
 
     $autoIncrement->next();
 
     return [
-        'nombre' => "Diagnostico ".$autoIncrement->current(),
-        'created_at' => $faker->date('Y-m-d H:i:s'),
-        'updated_at' => $faker->date('Y-m-d H:i:s'),
+        'codigo' => prefijoCeros($autoIncrement->current(),2),
+        'nombre' => "Diagnostico - ".$autoIncrement->current(),
+        'created_at' => $this->faker->date('Y-m-d H:i:s'),
+        'updated_at' => $this->faker->date('Y-m-d H:i:s')
     ];
 });
