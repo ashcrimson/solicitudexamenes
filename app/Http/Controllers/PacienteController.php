@@ -178,7 +178,7 @@ class PacienteController extends AppBaseController
         /**
          * @var Paciente $paciente
          */
-        $paciente = Paciente::with('partes')->where('run',$request->run)->first();
+        $paciente = Paciente::with('examenes')->where('run',$request->run)->first();
 
 
         if ($paciente){

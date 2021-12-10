@@ -115,7 +115,7 @@ class Paciente extends Model
      **/
     public function examenes()
     {
-        return $this->hasMany(\App\Models\Examene::class, 'paciente_id');
+        return $this->hasMany(\App\Models\Examen::class, 'paciente_id');
     }
 
 

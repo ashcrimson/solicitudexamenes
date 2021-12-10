@@ -296,3 +296,9 @@ function autoIncrementFaker()
         yield $i;
     }
 }
+
+
+function fechaEn(string $fecha=null){
+
+    return $fecha ? Carbon::parse($fecha)->format('Y-m-d') : '';
+}
