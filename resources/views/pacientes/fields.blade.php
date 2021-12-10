@@ -6,7 +6,7 @@
 
         <div class="input-group ">
 
-            {!! Form::text('run', request()->run ?? null, ['id' => 'run','class' => 'form-control','maxlength' => 9]) !!}
+            {!! Form::text('run', request()->rut ?? null, ['id' => 'run','class' => 'form-control','maxlength' => 9]) !!}
             <div class="input-group-append">
                 <button class="btn btn-outline-success" type="button" @click="getDatosPaciente()">
                                     <span v-show="!loading">
@@ -109,7 +109,7 @@
         el: '#paciente-fields',
         name: 'paciente-fields',
         created() {
-            @if(request()->run)
+            @if(request()->rut)
                 this.getDatosPaciente();
                 @endif
             this.calcularEdad(this.fecha_nac);
