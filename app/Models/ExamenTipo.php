@@ -29,6 +29,7 @@ class ExamenTipo extends Model
     protected $dates = ['deleted_at'];
 
 
+    protected $appends = ['text'];
 
     public $fillable = [
         'grupo_id',

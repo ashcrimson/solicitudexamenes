@@ -39,31 +39,43 @@
 
     <div class="row">
         @foreach($grupos as $grupo)
-            <div class="col-4">
+            <div class="col-6">
                 <div class="card">
                     <h3 class="card-title titulocarta" style="text-align: center;">{{$grupo->nombre}}</h3>
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th scope="col">Código</th>
-                            <th scope="col"></th>
                             <th scope="col">Examen</th>
+                            <th scope="col">Muestras</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($grupo->tipos as $tipo)
 
                             <tr>
-                                <td>{{ $tipo->codigo }}</td>
                                 <td>
+
                                     <div >
-                                        <input type="checkbox"  id="customCheck1" name="tipos[]" value="{{$tipo->id}}"
+
+                                        <input type="checkbox"  id="tipo{{$tipo->id}}" name="tipos[]" value="{{$tipo->id}}"
                                             {{in_array($tipo->id,isset($examen) ? $examen->tipos->pluck('id')->toArray() : []) ? 'checked' : ''}}
                                         >
-                                        <label for="customCheck1"></label>
+
+                                        <label for="tipo{{$tipo->id}}">
+                                            {{ $tipo->codigo }} - {{ $tipo->nombre }}
+                                        </label>
                                     </div>
                                 </td>
-                                <td>{{ $tipo->nombre }}</td>
+                                <td>
+                                    <select name="muestras[]" id="">
+                                        @foreach($tipo->muestras as $muestra)
+                                            <option value="{{$muestra->id}}">
+                                                {{$muestra->text}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </td>
+
                             </tr>
                         @endforeach
 
