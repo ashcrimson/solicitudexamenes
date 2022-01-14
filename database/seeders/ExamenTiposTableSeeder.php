@@ -20,7 +20,9 @@ class ExamenTiposTableSeeder extends Seeder
         \DB::table('examen_tipos')->delete();
 
 
-        factory(ExamenTipo::class,100)->create();
+        factory(ExamenTipo::class,100)->create()->each(function (ExamenTipo $examenTipo){
+            $examenTipo->muestras()->sync([1]);
+        });
 
     }
 }

@@ -75,7 +75,7 @@ class ExamenTipo extends Model
      **/
     public function muestras()
     {
-        return $this->belongsToMany(\App\Models\Muestra::class, 'tipo_has_muestra');
+        return $this->belongsToMany(\App\Models\Muestra::class, 'tipo_has_muestra','tipo_id','muestra_id');
     }
 
     /**

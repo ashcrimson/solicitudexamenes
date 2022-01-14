@@ -18,13 +18,14 @@ class Muestra extends Model
     use SoftDeletes;
 
     public $table = 'muestras';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['text'];
 
 
     public $fillable = [
@@ -62,5 +63,10 @@ class Muestra extends Model
     public function examenTipos()
     {
         return $this->belongsToMany(\App\Models\ExamenTipo::class, 'tipo_has_muestra');
+    }
+
+    public function getTextAttribute()
+    {
+        return $this->codigo." - ".$this->nombre;
     }
 }

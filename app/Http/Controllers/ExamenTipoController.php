@@ -57,6 +57,8 @@ class ExamenTipoController extends AppBaseController
         /** @var ExamenTipo $examenTipo */
         $examenTipo = ExamenTipo::create($input);
 
+        $examenTipo->muestras()->sync($request->muestras ?? []);
+
         Flash::success('Examen Tipo guardado exitosamente.');
 
         return redirect(route('examenTipos.index'));
@@ -125,6 +127,8 @@ class ExamenTipoController extends AppBaseController
 
         $examenTipo->fill($request->all());
         $examenTipo->save();
+
+        $examenTipo->muestras()->sync($request->muestras ?? []);
 
         Flash::success('Examen Tipo actualizado con éxito.');
 
