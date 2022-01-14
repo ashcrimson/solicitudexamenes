@@ -14,8 +14,8 @@ class AddForeignKeysToTipoHasMuestraTable extends Migration
     public function up()
     {
         Schema::table('tipo_has_muestra', function (Blueprint $table) {
-            $table->foreign('tipo_id', 'fk_examen_tipos_has_muestras_examen_tipos1')->references('id')->on('examen_tipos')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('muestra_id', 'fk_examen_tipos_has_muestras_muestras1')->references('id')->on('muestras')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('tipo_id', 'fk_examen_tipos_has_muestras_examen_tipos1')->references('id')->on('examen_tipos');
+            $table->foreign('muestra_id', 'fk_examen_tipos_has_muestras_muestras1')->references('id')->on('muestras');
         });
     }
 

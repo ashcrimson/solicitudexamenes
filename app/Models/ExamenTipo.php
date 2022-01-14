@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class ExamenTipo
  * @package App\Models
- * @version December 3, 2021, 5:34 pm CST
+ * @version January 13, 2022, 9:12 pm CST
  *
  * @property \App\Models\ExamenGrupo $grupo
+ * @property \Illuminate\Database\Eloquent\Collection $muestras
  * @property \Illuminate\Database\Eloquent\Collection $examenes
  * @property integer $grupo_id
  * @property string $codigo
@@ -54,7 +55,7 @@ class ExamenTipo extends Model
      */
     public static $rules = [
         'grupo_id' => 'required',
-        'codigo' => 'required|string|max:45',
+        'codigo' => 'required|string|max:255',
         'nombre' => 'required|string|max:255',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
@@ -67,6 +68,14 @@ class ExamenTipo extends Model
     public function grupo()
     {
         return $this->belongsTo(\App\Models\ExamenGrupo::class, 'grupo_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function muestras()
+    {
+        return $this->belongsToMany(\App\Models\Muestra::class, 'tipo_has_muestra');
     }
 
     /**

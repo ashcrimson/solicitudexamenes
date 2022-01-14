@@ -28,6 +28,8 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
         Route::resource('examen_estados', 'ExamenEstadosAPIController');
 
         Route::resource('examenes', 'ExamenAPIController');
+
+        Route::resource('muestras', 'MuestraAPIController');
     });
 
 
