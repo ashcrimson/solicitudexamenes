@@ -16,7 +16,7 @@ class AddForeignKeysToTiposHasExamenTable extends Migration
         Schema::table('tipos_has_examen', function (Blueprint $table) {
             $table->foreign('tipo_id', 'fk_tipos_has_examen1')->references('id')->on('examen_tipos');
             $table->foreign('examen_id', 'fk_tipos_has_examen2')->references('id')->on('examenes');
-            $table->foreign('muestra_id', 'fk_tipos_has_examen3')->references('id')->on('muestras')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('muestra_id', 'fk_tipos_has_examen3')->references('id')->on('muestras');
         });
     }
 
