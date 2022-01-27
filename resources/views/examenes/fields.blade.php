@@ -57,7 +57,7 @@
 
                                     <div >
 
-                                        <input type="checkbox"  id="tipo{{$tipo->id}}" name="tipos[]" value="{{$tipo->id}}"
+                                        <input type="checkbox"  id="tipo{{$tipo->id}}" name="tipos[{{$tipo->id}}]" value="{{$tipo->id}}"
                                             {{in_array($tipo->id,isset($examen) ? $examen->tipos->pluck('id')->toArray() : []) ? 'checked' : ''}}
                                         >
 
@@ -67,7 +67,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <select name="muestras[]" id="">
+                                    <select name="muestras[{{$tipo->id}}]" id="">
                                         @foreach($tipo->muestras as $muestra)
                                             <option value="{{$muestra->id}}">
                                                 {{$muestra->text}}

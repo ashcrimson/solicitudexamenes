@@ -37,6 +37,7 @@ class ExamenController extends AppBaseController
      */
     public function index(ExamenDataTable $examenDataTable)
     {
+
         return $examenDataTable->render('examenes.laboratorio.index');
     }
 
@@ -103,7 +104,10 @@ class ExamenController extends AppBaseController
         /** @var Examen $examen */
         $examen = Examen::create($request->all());
 
-        $examen->tipos()->sync($request->tipos ?? []);
+        $tipos = $this->getTipos($request);
+
+
+        $examen->tipos()->sync($tipos);
 
     }
 
@@ -173,12 +177,47 @@ class ExamenController extends AppBaseController
             return redirect(route('examenes.index'));
         }
 
-        $examen->fill($request->all());
-        $examen->save();
+
+        try {
+            DB::beginTransaction();
+
+            $this->procesaUpdate($request,$examen);
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
+
+
 
         Flash::success('Examen actualizado con éxito.');
 
         return redirect(route('examenes.index'));
+    }
+
+
+    public function procesaUpdate(UpdateExamenRequest $request,Examen $examen)
+    {
+
+        /**
+         * @var Paciente $paciente
+         */
+        $paciente = $this->creaOactualizaPaciente($request);
+
+        $request->merge([
+            'paciente_id' => $paciente->id,
+//            'user_solicita' => auth()->user()->id,
+//            'estado_id' => ExamenEstado::INGRESADO
+        ]);
+
+        $examen->fill($request->all());
+        $examen->save();
+
+        $examen->tipos()->sync($request->tipos ?? []);
+
     }
 
     /**
@@ -257,6 +296,26 @@ class ExamenController extends AppBaseController
 
 
         return $examen;
+    }
+
+    public function getTipos($request)
+    {
+        $tipos = [];
+
+        if ($request->tipos){
+
+            $mustras = $request->muestras ?? [];
+
+            foreach ($request->tipos as $index => $tipo) {
+                $muestra = $mustras[$tipo] ?? null;
+
+                if ($muestra){
+                    $tipos[$tipo] = ['muestra_id' => $muestra];
+                }
+            }
+        }
+
+        return $tipos;
     }
 
 }

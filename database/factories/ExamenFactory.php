@@ -22,7 +22,6 @@ $factory->define(Examen::class, function (Faker $faker) use ($autoIncrement){
         'user_solicita' => User::role(['Medico'])->get()->random()->id,
         'user_realiza' => User::role(['Técnico Laboratorio'])->get()->random()->id,
         'fecha_realiza' => $faker->date('Y-m-d H:i:s'),
-        'muestras' => $faker->randomElement(['1','1,5','55,62','65','3']),
         'rutina_urgencia' => $faker->randomElement(['RUTINA', 'URGENCIA' , 'AMBAS']),
         'notas' => $faker->text,
         'estado_id' => $faker->randomElement([ExamenEstado::INGRESADO,ExamenEstado::SOLICITADO,ExamenEstado::PROGRAMADO]),

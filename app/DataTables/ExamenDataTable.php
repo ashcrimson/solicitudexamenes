@@ -30,6 +30,11 @@ class ExamenDataTable extends DataTable
                return $examen->paciente->nombre_completo;
 
            })
+           ->editColumn('muestras',function (Examen $examen){
+
+               return $examen->muestras_string;
+
+           })
              ->editColumn('id',function (Examen $examen){
 
                  return $examen->id;

@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $user_solicita
  * @property integer $user_realiza
  * @property string|\Carbon\Carbon $fecha_realiza
- * @property string $muestras
  * @property string $rutina_urgencia
  * @property string $notas
  * @property integer $estado_id
@@ -47,7 +46,6 @@ class Examen extends Model
         'user_solicita',
         'user_realiza',
         'fecha_realiza',
-        'muestras',
         'rutina_urgencia',
         'notas',
         'estado_id'
@@ -66,7 +64,6 @@ class Examen extends Model
         'user_solicita' => 'integer',
         'user_realiza' => 'integer',
         'fecha_realiza' => 'datetime',
-        'muestras' => 'string',
         'rutina_urgencia' => 'string',
         'notas' => 'string',
         'estado_id' => 'integer'
@@ -79,7 +76,6 @@ class Examen extends Model
      */
     public static $rules = [
         'diagnostico_id' => 'required',
-        'muestras' => 'nullable|string|max:255',
         'rutina_urgencia' => 'nullable|string|max:255',
         'notas' => 'nullable|string',
     ];
@@ -129,6 +125,20 @@ class Examen extends Model
      **/
     public function tipos()
     {
-        return $this->belongsToMany(\App\Models\ExamenTipo::class, 'tipos_has_examen','examen_id','tipo_id');
+        return $this->belongsToMany(\App\Models\ExamenTipo::class, 'tipos_has_examen','examen_id','tipo_id')
+            ->withPivot('muestra_id');
+    }
+
+    public function getMuestrasStringAttribute()
+    {
+        $muestras = [];
+
+        foreach ($this->tipos as $index => $tipo) {
+            $muestras[$tipo->pivot->muestra_id] = $tipo->pivot->muestra_id;
+        }
+
+        sort($muestras);
+
+        return implode(',',$muestras);
     }
 }
