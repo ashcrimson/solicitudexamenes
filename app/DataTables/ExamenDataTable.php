@@ -55,7 +55,7 @@ class ExamenDataTable extends DataTable
      */
     public function query(Examen $model)
     {
-        return $model->newQuery()->with(['paciente','diagnostico','estado']);
+        return $model->newQuery()->with(['paciente','diagnostico','estado','userSolicita']);
     }
 
     /**
@@ -111,7 +111,7 @@ class ExamenDataTable extends DataTable
             Column::make('paciente')->name('paciente.nombre_completo')->data('paciente.nombre_completo')
                 ->searchable(false)->orderable(false),
             Column::make('diagnostico')->name('diagnostico.nombre')->data('diagnostico.nombre'),
-            Column::make('user_solicita'),
+            Column::make('Medico')->name('userSolicita.name')->data('user_solicita.name'),
             Column::make('muestras'),
             Column::make('rutina_urgencia'),
             Column::make('estado')->data('estado.nombre')->name('estado.nombre'),
