@@ -51,9 +51,17 @@ class ExamenController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create($clase)
     {
-        $grupos = ExamenGrupo::with('tipos')->get();
+        $grupos = ExamenGrupo::with(['tipos' => function ($q) use ($clase){
+
+            if ($clase!='ambas'){
+
+                $q->where('rutina_emergencia',$clase)
+                    ->orWhere('rutina_emergencia','ambas');
+            }
+
+        }])->get();
 
         return view('examenes.create',compact('grupos'));
     }
