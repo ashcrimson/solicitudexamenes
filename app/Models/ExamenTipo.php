@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class ExamenTipo
  * @package App\Models
- * @version January 13, 2022, 9:12 pm CST
+ * @version January 30, 2022, 5:59 pm CST
  *
  * @property \App\Models\ExamenGrupo $grupo
  * @property \Illuminate\Database\Eloquent\Collection $muestras
@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $grupo_id
  * @property string $codigo
  * @property string $nombre
+ * @property string $rutina_emergencia
  */
 class ExamenTipo extends Model
 {
@@ -29,12 +30,12 @@ class ExamenTipo extends Model
     protected $dates = ['deleted_at'];
 
 
-    protected $appends = ['text'];
 
     public $fillable = [
         'grupo_id',
         'codigo',
-        'nombre'
+        'nombre',
+        'rutina_emergencia'
     ];
 
     /**
@@ -46,7 +47,8 @@ class ExamenTipo extends Model
         'id' => 'integer',
         'grupo_id' => 'integer',
         'codigo' => 'string',
-        'nombre' => 'string'
+        'nombre' => 'string',
+        'rutina_emergencia' => 'string'
     ];
 
     /**
@@ -58,6 +60,7 @@ class ExamenTipo extends Model
         'grupo_id' => 'required',
         'codigo' => 'required|string|max:255',
         'nombre' => 'required|string|max:255',
+        'rutina_emergencia' => 'required|string',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
