@@ -14,7 +14,7 @@
 
 
 <!-- Rutina Urgencia Field -->
-{!! Form::label('rutina_emergencia', 'Rutina Urgencia:') !!}
-{!! $examenTipo->rutina_emergencia !!}<br>
+{!! Form::label('rutina_urgencia', 'Rutina Urgencia:') !!}
+{!! $examenTipo->rutina_urgencia !!}<br>
 
 

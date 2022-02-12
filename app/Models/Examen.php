@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $user_solicita
  * @property integer $user_realiza
  * @property string|\Carbon\Carbon $fecha_realiza
- * @property string $rutina_emergencia
+ * @property string $rutina_urgencia
  * @property string $notas
  * @property integer $estado_id
  */
@@ -46,7 +46,7 @@ class Examen extends Model
         'user_solicita',
         'user_realiza',
         'fecha_realiza',
-        'rutina_emergencia',
+        'rutina_urgencia',
         'notas',
         'estado_id'
     ];
@@ -64,7 +64,7 @@ class Examen extends Model
         'user_solicita' => 'integer',
         'user_realiza' => 'integer',
         'fecha_realiza' => 'datetime',
-        'rutina_emergencia' => 'string',
+        'rutina_urgencia' => 'string',
         'notas' => 'string',
         'estado_id' => 'integer'
     ];

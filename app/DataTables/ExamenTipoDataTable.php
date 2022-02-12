@@ -101,7 +101,7 @@ class ExamenTipoDataTable extends DataTable
             Column::make('grupo')->data('grupo.nombre')->name('grupo.nombre'),
             Column::make('codigo'),
             Column::make('nombre'),
-            Column::make('rutina_emergencia')
+            Column::make('rutina_urgencia')
         ];
     }
 

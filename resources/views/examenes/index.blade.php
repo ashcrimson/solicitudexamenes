@@ -47,7 +47,7 @@
 
                                                 <div class="col-sm-4">
 
-                                                    <a href="{{route('examenes.nuevo','emergencia')}}" type="button" class="btn btn-outline-warning">
+                                                    <a href="{{route('examenes.nuevo','urgencia')}}" type="button" class="btn btn-outline-warning">
                                                         Urgencia
                                                     </a>
 

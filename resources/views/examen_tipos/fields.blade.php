@@ -28,17 +28,16 @@
     </div>
 
     <div class="form-group col-sm-6">
-        {!! Form::label('rutina_emergencia','Rutina Urgencia:') !!}
+        {!! Form::label('rutina_urgencia','Rutina Urgencia:') !!}
         {!!
             Form::select(
-                'rutina_emergencia',
+                'rutina_urgencia',
                 [
                     'rutina' =>'rutina',
-                    'emergencia' =>'emergencia',
-                    'ambas' =>'ambas',
+                    'urgencia' =>'urgencia',
                 ]
                 , null
-                , ['id'=>'rutina_emergencias','class' => 'form-control','style'=>'width: 100%']
+                , ['id'=>'rutina_urgencias','class' => 'form-control','style'=>'width: 100%']
             )
         !!}
     </div>

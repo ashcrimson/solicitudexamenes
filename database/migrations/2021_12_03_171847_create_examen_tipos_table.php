@@ -18,7 +18,7 @@ class CreateExamenTiposTable extends Migration
             $table->unsignedBigInteger('grupo_id')->index('fk_tipo_grupo_idx1');
             $table->string('codigo')->unique();
             $table->string('nombre');
-            $table->enum('rutina_emergencia', ['rutina', 'emergencia', 'ambas']);
+            $table->enum('rutina_urgencia', ['rutina', 'urgencia', 'ambas']);
             $table->timestamps();
             $table->softDeletes();
         });

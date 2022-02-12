@@ -57,8 +57,8 @@ class ExamenController extends AppBaseController
 
             if ($clase!='ambas'){
 
-                $q->where('rutina_emergencia',$clase)
-                    ->orWhere('rutina_emergencia','ambas');
+                $q->where('rutina_urgencia',$clase)
+                    ->orWhere('rutina_urgencia','ambas');
             }
 
         }])->get();

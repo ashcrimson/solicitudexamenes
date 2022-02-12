@@ -21,7 +21,7 @@ class CreateExamenesTable extends Migration
             $table->unsignedBigInteger('user_solicita')->index('fk_examene_users_idx');
             $table->unsignedBigInteger('user_realiza')->nullable()->index('fk_examene_users1_idx');
             $table->dateTime('fecha_realiza')->nullable();
-            $table->enum('rutina_emergencia', ['rutina', 'emergencia', 'ambas']);
+            $table->enum('rutina_urgencia', ['rutina', 'urgencia', 'ambas']);
             $table->text('notas')->nullable();
             $table->unsignedBigInteger('estado_id')->index('fk_examene_estados1_idx');
             $table->timestamps();
