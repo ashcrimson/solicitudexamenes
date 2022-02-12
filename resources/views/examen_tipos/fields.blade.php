@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-group col-sm-6">
-        {!! Form::label('rutina_emergencia','Rutina Emergencia:') !!}
+        {!! Form::label('rutina_emergencia','Rutina Urgencia:') !!}
         {!!
             Form::select(
                 'rutina_emergencia',

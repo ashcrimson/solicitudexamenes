@@ -13,8 +13,8 @@
 {!! $examenTipo->nombre !!}<br>
 
 
-<!-- Rutina Emergencia Field -->
-{!! Form::label('rutina_emergencia', 'Rutina Emergencia:') !!}
+<!-- Rutina Urgencia Field -->
+{!! Form::label('rutina_emergencia', 'Rutina Urgencia:') !!}
 {!! $examenTipo->rutina_emergencia !!}<br>
 
 
