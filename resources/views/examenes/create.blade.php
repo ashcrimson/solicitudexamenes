@@ -13,8 +13,10 @@
                 </div>
                 <div class="col ">
                     <a class="btn btn-outline-info float-right"
-                       href="{{route('examenes.index')}}">
-                        <i class="fa fa-list" aria-hidden="true"></i>&nbsp;<span class="d-none d-sm-inline">{{__('Listado')}}</span>
+                       href="{{url()->previous()}}">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;
+                        <span class="d-none d-sm-inline">{{__('Regresar')}}
+                        </span>
                     </a>
                 </div>
             </div>
@@ -28,6 +30,8 @@
 
             <div class="card">
                 <div class="card-body">
+
+                    @if($clase)
                     {!! Form::open(['route' => 'examenes.store','class' => 'wait-on-submit']) !!}
                         <div class="form-row">
 
@@ -45,6 +49,28 @@
                             </div>
                         </div>
                     {!! Form::close() !!}
+                    @else
+                        <div class="form-row">
+                            <div class="col-sm-4">
+
+                                <a href="{{route('examenes.create',['clase' => 'rutina'])}}" type="button" class="btn btn-outline-info">
+                                    Rutina
+                                </a>
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <a href="{{route('examenes.create',['clase' => 'urgencia'])}}" type="button" class="btn btn-outline-warning">
+                                    Urgencia
+                                </a>
+
+                            </div>
+
+
+
+
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

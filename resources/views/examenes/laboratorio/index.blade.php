@@ -15,56 +15,11 @@
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-outline-success" data-toggle="modal"
-                                    data-target="#modalNuevoExamen">
+                            <a href="{{route('examenes.create')}}" type="button" class="btn btn-outline-success" >
                                 <i class="fa fa-plus"></i>
                                 <span class="d-none d-sm-inline">{{__('Nuevo')}}</span>
-                            </button>
+                            </a>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="modalNuevoExamen" tabindex="-1" role="dialog"
-                                 aria-labelledby="modelTitleId" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="modelTitleId">
-                                                Seleccione una opción
-                                            </h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-row">
-                                                <div class="col-sm-4">
-
-                                                    <a href="{{route('examenes.nuevo','rutina')}}" type="button" class="btn btn-outline-info">
-                                                        Rutina
-                                                    </a>
-                                                </div>
-
-                                                <div class="col-sm-4">
-
-                                                    <a href="{{route('examenes.nuevo','urgencia')}}" type="button" class="btn btn-outline-warning">
-                                                        Urgencia
-                                                    </a>
-
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <a href="{{route('examenes.nuevo','ambas')}}" type="button" class="btn btn-outline-success">
-                                                        ambas
-                                                    </a>
-                                                </div>
-
-
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
                         </li>
                     </ol>
                 </div>

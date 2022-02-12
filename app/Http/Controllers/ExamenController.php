@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Response;
 
@@ -51,8 +52,11 @@ class ExamenController extends AppBaseController
      *
      * @return Response
      */
-    public function create($clase)
+    public function create(Request $request)
     {
+
+        $clase = $request->clase ?? null;
+
         $grupos = ExamenGrupo::with(['tipos' => function ($q) use ($clase){
 
             if ($clase!='ambas'){
@@ -63,7 +67,7 @@ class ExamenController extends AppBaseController
 
         }])->get();
 
-        return view('examenes.create',compact('grupos'));
+        return view('examenes.create',compact('grupos','clase'));
     }
 
     /**
