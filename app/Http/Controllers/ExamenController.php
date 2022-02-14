@@ -55,19 +55,25 @@ class ExamenController extends AppBaseController
     public function create(Request $request)
     {
 
-        $clase = $request->clase ?? null;
+        $clases = ['rutina', 'urgencia'];
 
-        $grupos = ExamenGrupo::with(['tipos' => function ($q) use ($clase){
+        foreach ($clases as $index => $clase) {
 
-            if ($clase!='ambas'){
 
-                $q->where('rutina_urgencia',$clase)
-                    ->orWhere('rutina_urgencia','ambas');
-            }
+            $grupos[$clase] = ExamenGrupo::with(['tipos' => function ($q) use ($clase){
 
-        }])->get();
+                if ($clase!='ambas'){
 
-        return view('examenes.create',compact('grupos','clase'));
+                    $q->where('rutina_urgencia',$clase)
+                        ->orWhere('rutina_urgencia','ambas')
+                        ->with('muestras');
+                }
+
+            }])->get();
+        }
+
+
+        return view('examenes.create',compact('grupos'));
     }
 
     /**
@@ -164,7 +170,22 @@ class ExamenController extends AppBaseController
 
         $examen = $this->addAttributos($examen);
 
-        $grupos = ExamenGrupo::with('tipos')->get();
+        $clases = ['rutina', 'urgencia'];
+
+        foreach ($clases as $index => $clase) {
+
+
+            $grupos[$clase] = ExamenGrupo::with(['tipos' => function ($q) use ($clase){
+
+                if ($clase!='ambas'){
+
+                    $q->where('rutina_urgencia',$clase)
+                        ->orWhere('rutina_urgencia','ambas')
+                        ->with('muestras');
+                }
+
+            }])->get();
+        }
 
 
         return view('examenes.edit',compact('examen','grupos'));

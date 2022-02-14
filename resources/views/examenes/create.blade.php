@@ -31,7 +31,6 @@
             <div class="card">
                 <div class="card-body">
 
-                    @if($clase)
                     {!! Form::open(['route' => 'examenes.store','class' => 'wait-on-submit']) !!}
                         <div class="form-row">
 
@@ -49,28 +48,7 @@
                             </div>
                         </div>
                     {!! Form::close() !!}
-                    @else
-                        <div class="form-row">
-                            <div class="col-sm-4">
 
-                                <a href="{{route('examenes.create',['clase' => 'rutina'])}}" type="button" class="btn btn-outline-info">
-                                    Rutina
-                                </a>
-                            </div>
-
-                            <div class="col-sm-4">
-
-                                <a href="{{route('examenes.create',['clase' => 'urgencia'])}}" type="button" class="btn btn-outline-warning">
-                                    Urgencia
-                                </a>
-
-                            </div>
-
-
-
-
-                        </div>
-                    @endif
                 </div>
             </div>
         </div>

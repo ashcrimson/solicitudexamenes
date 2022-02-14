@@ -35,56 +35,69 @@
 </div>
 
 
-<div id="fieldsExamen">
+<div id="fieldsExamen" class="form-row">
 
-    <div class="row">
-        @foreach($grupos as $grupo)
-            <div class="col-6">
-                <div class="card">
-                    <h3 class="card-title titulocarta" style="text-align: center;">{{$grupo->nombre}}</h3>
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th scope="col">Examen</th>
-                            <th scope="col">Muestras</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($grupo->tipos as $tipo)
-
-                            <tr>
-                                <td>
-
-                                    <div >
-
-                                        <input type="checkbox"  id="tipo{{$tipo->id}}" name="tipos[{{$tipo->id}}]" value="{{$tipo->id}}"
-                                            {{in_array($tipo->id,isset($examen) ? $examen->tipos->pluck('id')->toArray() : []) ? 'checked' : ''}}
-                                        >
-
-                                        <label for="tipo{{$tipo->id}}">
-                                            {{ $tipo->codigo }} - {{ $tipo->nombre }}
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <select name="muestras[{{$tipo->id}}]" id="">
-                                        @foreach($tipo->muestras as $muestra)
-                                            <option value="{{$muestra->id}}">
-                                                {{$muestra->text}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </td>
-
-                            </tr>
-                        @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        @endforeach
+    <div class="form-group col-sm-12">
+        <label for="">Seleccionte una opción</label>
+        <br>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="rutina" v-model="clase" name="rutina_urgencia" class="custom-control-input" value="rutina">
+            <label class="custom-control-label" for="rutina">Rutina</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="urgencia" v-model="clase" name="rutina_urgencia" class="custom-control-input" value="urgencia">
+            <label class="custom-control-label" for="urgencia">Urgencia</label>
+        </div>
     </div>
+
+    <br>
+
+
+    <div class="form-group col-sm-6" v-for="grupo in gruposFiltrados">
+        <div class="card" >
+            <h3 class="card-title titulocarta" style="text-align: center;">
+                <span v-text="grupo.nombre"></span>
+            </h3>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Examen</th>
+                    <th scope="col">Muestras</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    <tr v-for="tipo in grupo.tipos">
+                        <td>
+
+                            <div >
+
+                                <input type="checkbox"  :id="'tipo'+tipo.id" :name="'tipos['+tipo.id+']'" :value="tipo.id"
+                                    v-model="tiposSeleccionados"
+                                >
+
+                                <label :for="'tipo'+tipo.id">
+                                    <span v-text="tipo.codigo"></span> - <span v-text="tipo.nombre"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <select :name="'muestras['+tipo.id+']'" id="">
+                                <option v-for="muestra in tipo.muestras" :value="muestra.id">
+                                    @{{ muestra.text }}
+                                </option>
+                            </select>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="form-group col-sm-12" style="padding: 0px; margin: 0px"></div>
 
     <div class="form-group col-sm-6">
         <select-diagnostico
@@ -116,11 +129,27 @@
 
         },
         data: {
+            clase : @json($examen->rutina_urgencia ?? ''),
+            grupos : @json($grupos ?? []),
+            tiposSeleccionados : @json(isset($examen) ? $examen->tipos->pluck('id')->toArray() : []),//
+
             diagnostico : @json($examen->diagnostico ?? null),
         },
         methods: {
 
+
+        },
+        computed:{
+            gruposFiltrados(){
+                if (this.clase!=''){
+                    return this.grupos[this.clase];
+                }
+
+                return [];
+            }
         }
+
+
     });
 </script>
 @endpush
