@@ -9,13 +9,15 @@
             {!! Form::text('run', request()->rut ?? null, ['id' => 'run','class' => 'form-control','maxlength' => 9]) !!}
             <div class="input-group-append">
                 <button class="btn btn-outline-success" type="button" @click="getDatosPaciente()">
-                                    <span v-show="!loading">
-                                        <i class="fa fa-search"></i>
-                                    </span>
+                    <span v-show="!loading" style="font-size: 12px; position: relative; bottom: 5px;">
+                        <i class="fa fa-search"></i>
+                    </span>
                     <span v-show="loading">
-                                        <i class="fa fa-sync fa-spin"></i>
-                                    </span>
+                        <i class="fa fa-sync fa-spin"></i>
+                    </span>
+                    <span style="font-size: 12px; position: relative; bottom: 5px;">
                     Consultar
+                    </span>
                 </button>
             </div>
         </div>

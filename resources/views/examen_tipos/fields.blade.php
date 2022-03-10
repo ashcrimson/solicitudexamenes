@@ -35,6 +35,7 @@
                 [
                     'rutina' =>'rutina',
                     'urgencia' =>'urgencia',
+                    'ambos' =>'ambos',
                 ]
                 , null
                 , ['id'=>'rutina_urgencias','class' => 'form-control','style'=>'width: 100%']

@@ -75,7 +75,7 @@ class Examen extends Model
      * @var array
      */
     public static $rules = [
-        'diagnostico_id' => 'required',
+        'diagnostico_id' => 'nullable',
         'rutina_urgencia' => 'nullable|string|max:255',
         'notas' => 'nullable|string',
     ];
