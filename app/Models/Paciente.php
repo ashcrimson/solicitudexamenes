@@ -96,7 +96,7 @@ class Paciente extends Model
         'apellido_materno' => 'required|string|max:255',
         'primer_nombre' => 'required|string|max:255',
         'segundo_nombre' => 'required|string|max:255',
-        'fecha_nac' => 'required',
+        'fecha_nac' => 'datetime:Y-m-d',
         'sexo' => 'required|string|max:255',
         'sigla_grado' => 'nullable|string|max:255',
         'unid_rep_dot' => 'nullable|string|max:255',

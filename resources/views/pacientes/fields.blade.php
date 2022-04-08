@@ -80,16 +80,16 @@
 
 
     <!-- telefono Field -->
-    <!-- <div class="form-group col-sm-3">
+    <div class="form-group col-sm-3">
         {!! Form::label('telefono', 'Telefono:') !!}
         {!! Form::text('telefono', null, ['id' => 'telefono','class' => 'form-control','maxlength' => 255]) !!}
-    </div> -->
+    </div>
 
     <!-- Direccion Field -->
-   <!--  <div class="form-group col-sm-12">
+    <div class="form-group col-sm-12">
         {!! Form::label('direccion', 'Dirección:') !!}
         {!! Form::text('direccion', null, ['id' => 'direccion','class' => 'form-control','maxlength' => 255]) !!}
-    </div> -->
+    </div>
 
 
     <!-- familiar_responsable Field -->
@@ -151,7 +151,7 @@
                         $("#apellido_materno").val(paciente.apellido_materno);
                         $("#primer_nombre").val(paciente.primer_nombre);
                         $("#segundo_nombre").val(paciente.segundo_nombre);
-                        // $("#fecha_nac").val(paciente.fecha_nac);
+                        $("#fecha_nac").val(paciente.fecha_nac);
                         this.fecha_nac = paciente.fecha_nac;
 
                         if (paciente.sexo=='M'){
@@ -160,8 +160,21 @@
 
                             $("#sexo").bootstrapToggle('off');
                         }
-                        $("#telefono").val(paciente.telefono);
-                        $("#direccion").val(paciente.direccion);
+
+                        // Si viene del API
+
+                        if (typeof paciente['Telefono'] !== 'undefined'){ 
+                            $("#telefono").val(paciente['Telefono']);
+                            $("#direccion").val(paciente['Direccion']);
+                        } 
+
+                        // Si viene de la BBDD
+                        else {
+                            $("#telefono").val(paciente['telefono']);
+                            $("#direccion").val(paciente['direccion']);
+
+                        }
+                        
                         $("#familiar_responsable").val(paciente.familiar_responsable);
                     }
 

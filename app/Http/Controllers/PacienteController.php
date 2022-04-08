@@ -28,6 +28,7 @@ class PacienteController extends AppBaseController
      */
     public function index(PacienteDataTable $pacienteDataTable,Request $request)
     {
+        
 
         $scope = new ScopePacienteDataTable();
         $scope->del = $request->del ?? null;
@@ -176,7 +177,7 @@ class PacienteController extends AppBaseController
     {
 
         /**
-         * @var Paciente $paciente
+         * @var Paciente $paciente 
          */
         $paciente = Paciente::with('examenes')->where('run',$request->run)->first();
 
@@ -188,7 +189,7 @@ class PacienteController extends AppBaseController
 
 
 
-            return  $this->sendResponse($paciente,"Paciente");
+            return  $this->sendResponse($paciente,"Respuesta BBDD");
         }
         else{
 
@@ -197,13 +198,18 @@ class PacienteController extends AppBaseController
             try {
 
 
+                $api = new nusoap_client('http://172.25.16.18/bus/webservice/ws.php?wsdl');
+                $response = $api->call('buscarDetallePersona', array('run' => $request->run));
+               
 
-                $params = array('run' => $request->run);
-                $client = new nusoap_client('http://172.25.16.18/bus/webservice/ws.php?wsdl');
-                $client->response_timeout = 5;
-                $response = $client->call('buscarDetallePersona', $params);
+                $api = new nusoap_client('http://172.25.16.18/bus/webservice/ws.php?wsdl');
+                $response2 = $api->call('WSSolicitudPID', array('RUNPaciente' => $request->run));
 
-                return $this->sendResponse($response,"Paciente");
+                $response3 = array_merge($response,$response2);
+               
+
+
+                return $this->sendResponse($response3,"Respuesta API");
 
             } catch (Exception $exception) {
 
