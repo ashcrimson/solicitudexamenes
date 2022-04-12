@@ -4,16 +4,6 @@
 
 @section('content')
 
-$api = new nusoap_client('http://172.25.16.18/bus/webservice/ws.php?wsdl');
-                $response = $api->call('buscarDetallePersona', array('run' => $request->run));
-               
-
-                $api = new nusoap_client('http://172.25.16.18/bus/webservice/ws.php?wsdl');
-                $response2 = $api->call('WSSolicitudPID', array('RUNPaciente' => $request->run));
-
-                $response3 = array_merge($response,$response2);
-
-                dd($response3);
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
