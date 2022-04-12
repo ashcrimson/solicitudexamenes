@@ -8,6 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests;
 use App\Http\Requests\CreatePacienteRequest;
 use App\Http\Requests\UpdatePacienteRequest;
+use App\Models\Examen;
 use App\Models\Paciente;
 use App\Models\Preparacion;
 use App\Models\Solicitud;
@@ -28,7 +29,7 @@ class PacienteController extends AppBaseController
      */
     public function index(PacienteDataTable $pacienteDataTable,Request $request)
     {
-        
+
 
         $scope = new ScopePacienteDataTable();
         $scope->del = $request->del ?? null;
@@ -177,12 +178,20 @@ class PacienteController extends AppBaseController
     {
 
         /**
-         * @var Paciente $paciente 
+         * @var Paciente $paciente
          */
         $paciente = Paciente::with('examenes')->where('run',$request->run)->first();
 
 
         if ($paciente){
+
+            /**
+             * @var Examen $ultimoExamen
+             */
+            $ultimoExamen = $paciente->examenes->last();
+
+
+            $paciente->setAttribute('ultimo_examen',$ultimoExamen);
 
             $paciente->setAttribute('sexo',$paciente->sexo ? 'M' : 'F');
             $paciente->setAttribute('fecha_nac',fechaEn($paciente->fecha_nac));
@@ -196,19 +205,19 @@ class PacienteController extends AppBaseController
 //            dd('consulta api');
 
             try {
- 
- 
+
+
                 $api = new nusoap_client('http://172.25.16.18/bus/webservice/ws.php?wsdl');
                 $response = $api->call('buscarDetallePersonaPROA', array('run' => $request->run));
 
                 $response = json_decode($response, true);
-               
+
 
                 $api = new nusoap_client('http://172.25.16.18/bus/webservice/ws.php?wsdl');
                 $response2 = $api->call('WSSolicitudPID', array('RUNPaciente' => $request->run));
 
                 $response3 = array_merge($response,$response2);
-               
+
 
 
                 return $this->sendResponse($response3,"Respuesta API");
