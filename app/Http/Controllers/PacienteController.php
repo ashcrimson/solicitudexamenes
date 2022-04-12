@@ -196,10 +196,12 @@ class PacienteController extends AppBaseController
 //            dd('consulta api');
 
             try {
-
-
+ 
+ 
                 $api = new nusoap_client('http://172.25.16.18/bus/webservice/ws.php?wsdl');
-                $response = $api->call('buscarDetallePersona', array('run' => $request->run));
+                $response = $api->call('buscarDetallePersonaPROA', array('run' => $request->run));
+
+                $response = json_decode($response, true);
                
 
                 $api = new nusoap_client('http://172.25.16.18/bus/webservice/ws.php?wsdl');

@@ -91,6 +91,18 @@
         {!! Form::text('direccion', null, ['id' => 'direccion','class' => 'form-control','maxlength' => 255]) !!}
     </div>
 
+       <!-- Desc Servicio Field -->
+    <div class="form-group col-sm-3">
+        {!! Form::label('descserv', 'Descripción Servicio:') !!}
+        {!! Form::text('descserv', null, ['id' => 'descserv','class' => 'form-control','maxlength' => 255]) !!}
+    </div>
+
+       <!-- Desc Servicio Field -->
+    <div class="form-group col-sm-3">
+        {!! Form::label('codserv', 'Código Servicio:') !!}
+        {!! Form::text('codserv', null, ['id' => 'codserv','class' => 'form-control','maxlength' => 255]) !!}
+    </div>
+
 
     <!-- familiar_responsable Field -->
     <!-- <div class="form-group col-sm-12">
@@ -153,6 +165,38 @@
                         $("#segundo_nombre").val(paciente.segundo_nombre);
                         $("#fecha_nac").val(paciente.fecha_nac);
                         this.fecha_nac = paciente.fecha_nac;
+
+                        if(typeof paciente["hosp"] === 'undefined'){
+
+                            if (typeof paciente.ultimo_examen === 'undefined'){
+                                alertWarning('Paciente no hospitalizado');
+                            }else {
+
+                                $("#codserv").val(paciente.ultimo_examen.codserv);
+                                $("#descserv").val(paciente.ultimo_examen.descserv);
+                                $("#nropiso").val(paciente.ultimo_examen.nropiso);
+                                $("#nropieza").val(paciente.ultimo_examen.nropieza);
+                                $("#nrocama").val(paciente.ultimo_examen.nrocama);
+
+                            }
+
+
+                        }else {
+
+
+                            $("#codserv").val(paciente["hosp"].codserv);
+                            $("#descserv").val(paciente["hosp"].descserv);
+                            $("#nropiso").val(paciente["hosp"].nropiso);
+                            $("#nropieza").val(paciente["hosp"].nropieza);
+                            $("#nrocama").val(paciente["hosp"].nrocama);
+
+                            var descserv = paciente["hosp"].descserv || null;
+
+
+                            if (!descserv){
+                                alertWarning('Paciente no hospitalizado');
+                            }
+                        }
 
                         if (paciente.sexo=='M'){
                             $('#sexo').bootstrapToggle('on')

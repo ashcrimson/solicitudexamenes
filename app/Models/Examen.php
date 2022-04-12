@@ -30,7 +30,7 @@ class Examen extends Model
     use SoftDeletes;
 
     public $table = 'examenes';
-
+ 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -48,7 +48,18 @@ class Examen extends Model
         'fecha_realiza',
         'rutina_urgencia',
         'notas',
-        'estado_id'
+        'estado_id',
+        'descserv',
+        'ingreso',
+        'inghosp',
+        'nrocama',
+        'codubic',
+        'nropiso',
+        'nropieza',
+        'tipocama',
+        'codserv',
+        'codinst',
+        'descinst'
     ];
 
     /**
