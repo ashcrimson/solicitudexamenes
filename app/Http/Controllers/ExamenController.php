@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ExamenDataTable;
+use App\DataTables\Scopes\ScopeExamenDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateExamenRequest;
 use App\Http\Requests\UpdateExamenRequest;
@@ -36,10 +37,21 @@ class ExamenController extends AppBaseController
      * @param ExamenDataTable $examenDataTable
      * @return Response
      */
-    public function index(ExamenDataTable $examenDataTable)
+    public function index(ExamenDataTable $examenDataTable, Request $request)
     {
+        $scope = new ScopeExamenDataTable();
+        $scope->estados = $request->get('estados') ?? [
+          ExamenEstado::INGRESADO,
+          ExamenEstado::SOLICITADO,
+          ExamenEstado::PROGRAMADO,
+          ExamenEstado::REALIZADO,
+          ExamenEstado::ANULADO,
+        ];
+        $examenDataTable->addScope($scope);
 
-        return $examenDataTable->render('examenes.laboratorio.index');
+        $estados = ExamenEstado::all();
+
+        return $examenDataTable->render('examenes.laboratorio.index', compact('estados'));
     }
 
     public function listUser(ExamenDataTable $examenDataTable)
@@ -273,7 +285,21 @@ class ExamenController extends AppBaseController
             return redirect(route('examenes.index'));
         }
 
-        $examen->delete();
+        try {
+            DB::beginTransaction();
+
+            $examen->fill([
+                'estado_id' => ExamenEstado::ELIMINADO,
+            ]);
+            $examen->save();
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
 
         Flash::success('Examen deleted successfully.');
 

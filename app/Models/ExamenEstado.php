@@ -26,6 +26,7 @@ class ExamenEstado extends Model
     const PROGRAMADO =  3;
     const REALIZADO =   4;
     const ANULADO =     5;
+    const ELIMINADO =     21;
 
 
     protected $dates = ['deleted_at'];

@@ -16,7 +16,6 @@ class ScopeExamenDataTable implements DataTableScope
     public $al;
     public $lista_espera;
 
-
     public function __construct()
     {
         $this->estados = request()->estados ?? null;

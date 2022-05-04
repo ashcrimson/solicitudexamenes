@@ -2,12 +2,13 @@
     <!-- Run Field -->
     <div class="form-group col-sm-4">
 
-        {!! Form::label('run', 'Run:') !!}
+{{--        {!! Form::label('run', 'Run:') !!}--}}
+        <label v-text="tituloSegunTipoDocumento"></label>
 
         <div class="input-group ">
 
             {!! Form::text('run', request()->rut ?? null, ['id' => 'run','class' => 'form-control','maxlength' => 9]) !!}
-            <div class="input-group-append">
+            <div class="input-group-append" v-if="ocultarBotonBuscar">
                 <button class="btn btn-outline-success" type="button" @click="getDatosPaciente()">
                     <span v-show="!loading" style="font-size: 12px; position: relative; bottom: 5px;">
                         <i class="fa fa-search"></i>
@@ -27,8 +28,10 @@
 
     <!-- Dv Run Field -->
     <div class="form-group col-sm-2">
-        {!! Form::label('dv_run', 'Dv Run:') !!}
-        {!! Form::text('dv_run', null, ['id' => 'dv_run','class' => 'form-control','maxlength' => 1]) !!}
+        <div  v-if="ocultarBotonBuscar">
+            {!! Form::label('dv_run', 'Dv Run:') !!}
+            {!! Form::text('dv_run', null, ['id' => 'dv_run','class' => 'form-control','maxlength' => 1]) !!}
+        </div>
     </div>
 
     <div class="form-group col-sm-12" style="padding: 0px; margin: 0px"></div>
@@ -111,6 +114,37 @@
     </div>
  -->
 
+    <div class="modal fade" id="modalElegirTipoDocumento" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modelTitleId">
+                        {{__('Elegir Tipo Documento')}}
+                    </h4>
+                    {{--                    <button type="button" class="close" @click.prevent="closeElegirTipoDOcumento()">--}}
+                    {{--                        <span aria-hidden="true">&times;</span>--}}
+                    {{--                    </button>--}}
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+
+                        <div class="form-group col-sm-8">
+                            <label for="hora_de_llamada">Tipo Documento:</label>
+                            <multiselect v-model="tipoDocumento" :options="tiposDocumentos" label="nombre" placeholder="Seleccione uno" >
+                            </multiselect>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    {{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click.prevent="closeElegirTipoDOcumento()">{{__('Cerrar')}}</button>--}}
+                    <button type="button" @click.prevent="saveElegirTipoDocumento()" class="btn btn-primary" >{{__('Guardar')}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
@@ -123,15 +157,32 @@
         el: '#paciente-fields',
         name: 'paciente-fields',
         created() {
+            this.openModalElegirTipoDocumento();
+
             @if(request()->rut)
                 this.getDatosPaciente();
                 @endif
             this.calcularEdad(this.fecha_nac);
+
+            this.ocultarBotonBuscar;
+            this.tituloSegunTipoDocumento;
         },
         data: {
             loading : false,
             fecha_nac : @json($parte->fecha_nac ?? null),
             edad : 0,
+
+            tiposDocumentos: [
+                {
+                    id: 1,
+                    nombre: 'RUT'
+                },
+                {
+                    id: 2,
+                    nombre: 'OTRO'
+                },
+            ],
+            tipoDocumento: null,
         },
         methods: {
             async getDatosPaciente(){
@@ -207,10 +258,10 @@
 
                         // Si viene del API
 
-                        if (typeof paciente['Telefono'] !== 'undefined'){ 
+                        if (typeof paciente['Telefono'] !== 'undefined'){
                             $("#telefono").val(paciente['Telefono']);
                             $("#direccion").val(paciente['Direccion']);
-                        } 
+                        }
 
                         // Si viene de la BBDD
                         else {
@@ -218,7 +269,7 @@
                             $("#direccion").val(paciente['direccion']);
 
                         }
-                        
+
                         $("#familiar_responsable").val(paciente.familiar_responsable);
                     }
 
@@ -236,14 +287,56 @@
                     var years = moment().diff(fecha, 'years',false);
                     this.edad = years;
                 }
+            },
+            openModalElegirTipoDocumento() {
+                setTimeout(() => {
+                    // this.itemDipVde = Object.assign({}, this.itemDipVdeDefault);
+                    $("#modalElegirTipoDocumento").modal('show');
+                }, 300);
+            },
+            closeElegirTipoDOcumento() {
+                setTimeout(() => {
+                    // this.itemDipVde = Object.assign({}, this.itemDipVdeDefault);
+                    $("#modalElegirTipoDocumento").modal('hide');
+                }, 300);
+            },
+            saveElegirTipoDocumento() {
+                console.log(this.tipoDocumento)
+                if (this.tipoDocumento) {
+                    this.closeElegirTipoDOcumento();
+                } else {
+                    iziTe('Debe elegir un Tipo Documento!');
+                }
             }
+        },
+        computed: {
+            ocultarBotonBuscar() {
+                if (this.tipoDocumento) {
+                    if (this.tipoDocumento.id == 2) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+                return false;
+            },
+            tituloSegunTipoDocumento() {
+                if (this.tipoDocumento) {
+                    if (this.tipoDocumento.id == 2) {
+                        return 'Numero identificación';
+                    } else {
+                        return 'RUN';
+                    }
+                }
+                return 'Numero identificación';
+            },
         },
         watch:{
             fecha_nac (fecha){
                 if (fecha){
                     this.calcularEdad(fecha)
                 }
-            }
+            },
         }
     });
 </script>
