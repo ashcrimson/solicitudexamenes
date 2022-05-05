@@ -1,4 +1,25 @@
 <div class="form-row" id="paciente-fields">
+
+    <div class="form-group col-sm-12">
+
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="hidden" name="rut" value="0" >
+            <input type="radio" class="custom-control-input" v-model="rut" name="rut" id="rut" value="1" >
+            <label class="custom-control-label" for="rut" >
+                RUT
+            </label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="hidden" name="otro_doc" value="0" >
+            <input type="radio" class="custom-control-input" v-model="otro_doc" name="otro_doc" id="otro_doc" value="1" >
+            <label class="custom-control-label" for="otro_doc" >
+                OTRO
+            </label>
+        </div>
+
+    </div>
+
     <!-- Run Field -->
     <div class="form-group col-sm-4">
 
@@ -114,40 +135,7 @@
     </div>
  -->
 
-    <div class="modal fade" id="modalElegirTipoDocumento" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-         aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog " role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modelTitleId">
-                        {{__('Elegir Tipo Documento')}}
-                    </h4>
-                    {{--                    <button type="button" class="close" @click.prevent="closeElegirTipoDOcumento()">--}}
-                    {{--                        <span aria-hidden="true">&times;</span>--}}
-                    {{--                    </button>--}}
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal">
-
-                        <div class="form-group col-sm-8">
-                            <label for="hora_de_llamada">Tipo Documento:</label>
-                            <multiselect v-model="tipoDocumento" :options="tiposDocumentos" label="nombre" placeholder="Seleccione uno" >
-                            </multiselect>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    {{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click.prevent="closeElegirTipoDOcumento()">{{__('Cerrar')}}</button>--}}
-                    <button type="button" @click.prevent="saveElegirTipoDocumento()" class="btn btn-primary" >{{__('Guardar')}}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
-
-
 
 @push('scripts')
 <script>
@@ -157,7 +145,6 @@
         el: '#paciente-fields',
         name: 'paciente-fields',
         created() {
-            this.openModalElegirTipoDocumento();
 
             @if(request()->rut)
                 this.getDatosPaciente();
@@ -172,17 +159,8 @@
             fecha_nac : @json($parte->fecha_nac ?? null),
             edad : 0,
 
-            tiposDocumentos: [
-                {
-                    id: 1,
-                    nombre: 'RUT'
-                },
-                {
-                    id: 2,
-                    nombre: 'OTRO'
-                },
-            ],
-            tipoDocumento: null,
+            rut: false,
+            otro_doc: false,
         },
         methods: {
             async getDatosPaciente(){
@@ -288,45 +266,21 @@
                     this.edad = years;
                 }
             },
-            openModalElegirTipoDocumento() {
-                setTimeout(() => {
-                    // this.itemDipVde = Object.assign({}, this.itemDipVdeDefault);
-                    $("#modalElegirTipoDocumento").modal('show');
-                }, 300);
-            },
-            closeElegirTipoDOcumento() {
-                setTimeout(() => {
-                    // this.itemDipVde = Object.assign({}, this.itemDipVdeDefault);
-                    $("#modalElegirTipoDocumento").modal('hide');
-                }, 300);
-            },
-            saveElegirTipoDocumento() {
-                console.log(this.tipoDocumento)
-                if (this.tipoDocumento) {
-                    this.closeElegirTipoDOcumento();
-                } else {
-                    iziTe('Debe elegir un Tipo Documento!');
-                }
-            }
         },
         computed: {
             ocultarBotonBuscar() {
-                if (this.tipoDocumento) {
-                    if (this.tipoDocumento.id == 2) {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                if (!this.rut) {
+                    return false;
+                } else {
+                    return true;
                 }
                 return false;
             },
             tituloSegunTipoDocumento() {
-                if (this.tipoDocumento) {
-                    if (this.tipoDocumento.id == 2) {
-                        return 'Numero identificación';
-                    } else {
-                        return 'RUN';
-                    }
+                if (!this.rut) {
+                    return 'Numero identificación';
+                } else {
+                    return 'RUN';
                 }
                 return 'Numero identificación';
             },
@@ -335,6 +289,16 @@
             fecha_nac (fecha){
                 if (fecha){
                     this.calcularEdad(fecha)
+                }
+            },
+            rut(val) {
+                if (val) {
+                    this.otro_doc = false;
+                }
+            },
+            otro_doc(val) {
+                if (val) {
+                    this.rut = false;
                 }
             },
         }
