@@ -33,6 +33,11 @@
     #fieldsExamen{
         font-size: 12px;
     }
+
+    select.form-control {
+        font-size: 12px;
+    }
+
     .card-body {
         padding: 1rem;
     }
@@ -125,11 +130,11 @@
                 </tbody>
             </table>
         </div>
-    </div> 
+    </div>
 
     <div class="form-group col-sm-12">
 
-    </div>    
+    </div>
 
 
     <div class="form-group col-sm-4" >
@@ -150,7 +155,7 @@
     <div class="form-group col-sm-4">
         <label for="hora_de_llamada">Programación:</label>
         <input class="form-control" name="hora_de_llamada" type="datetime-local"  id="hora_de_llamada">
-    </div> 
+    </div>
 </div>
 
 @push('scripts')

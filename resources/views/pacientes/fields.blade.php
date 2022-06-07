@@ -93,12 +93,11 @@
         <input type="text" class="form-control" readonly v-model="edad" value="0">
     </div>
 
-
     <div class="form-group col-sm-3">
         {!! Form::label('sexo', 'Sexo:') !!}<br>
         <input type="checkbox" data-toggle="toggle" data-size="normal" data-on="M" data-off="F" data-style="ios" name="sexo" id="sexo"
                value="1"
-            {{($rema->sexo ?? null)=="M" || ($paciente->sexo ?? null)=="M"  ? 'checked' : '' }}>
+            {{($rema->sexo ?? null)=="M" || ($paciente->sexo ?? $examen->paciente->sexo ?? null)=="M"  ? 'checked' : '' }}>
     </div>
 
 
@@ -116,17 +115,16 @@
     </div>
 
        <!-- Desc Servicio Field -->
-    <div class="form-group col-sm-3">
+    <div class="form-group col-sm-4">
         {!! Form::label('descserv', 'Descripción Servicio:') !!}
         {!! Form::text('descserv', null, ['id' => 'descserv','class' => 'form-control','maxlength' => 255]) !!}
     </div>
 
        <!-- Desc Servicio Field -->
-    <div class="form-group col-sm-3">
+    <div class="form-group col-sm-4">
         {!! Form::label('codserv', 'Código Servicio:') !!}
         {!! Form::text('codserv', null, ['id' => 'codserv','class' => 'form-control','maxlength' => 255]) !!}
     </div>
-
 
     <!-- familiar_responsable Field -->
     <!-- <div class="form-group col-sm-12">
@@ -134,6 +132,35 @@
         {!! Form::text('familiar_responsable', null, ['id' => 'familiar_responsable','class' => 'form-control','maxlength' => 255]) !!}
     </div>
  -->
+
+    <div class="form-group col-sm-4">
+        {!! Form::label('familiar_responsable', 'Serivicio Solicitante:') !!}
+        <select class="form-control" name="servicio_solicitante">
+            <option value="">Seleccione ...</option>
+            <option value="ambulatiorio" @if(isset($examen)) @if(!$examen->descserv || !$examen->codserv) selected @endif @endif >AMBULATORIO</option>
+            <option value="hospitalizado" @if(isset($examen)) @if($examen->descserv || $examen->codserv) selected @endif @endif>HOSPITALIZADO</option>
+        </select>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <label for="codubic">Ubicación:</label>
+        {!! Form::text('codubic', null, ['id' => 'codubic','class' => 'form-control','maxlength' => 255]) !!}
+    </div>
+
+    <div class="form-group col-sm-3">
+        <label for="nropiso">Piso:</label>
+        {!! Form::text('nropiso', null, ['id' => 'nropiso','class' => 'form-control','maxlength' => 255]) !!}
+    </div>
+
+    <div class="form-group col-sm-3">
+        <label for="nropieza">Pieza:</label>
+        {!! Form::text('nropieza', null, ['id' => 'nropieza','class' => 'form-control','maxlength' => 255]) !!}
+    </div>
+
+    <div class="form-group col-sm-4">
+        <label for="tipocama">Cama:</label>
+        {!! Form::text('tipocama', null, ['id' => 'tipocama','class' => 'form-control','maxlength' => 255]) !!}
+    </div>
 
 </div>
 
@@ -156,7 +183,7 @@
         },
         data: {
             loading : false,
-            fecha_nac : @json($parte->fecha_nac ?? null),
+            fecha_nac : @json($examen->paciente->fecha_nac ?? null),
             edad : 0,
 
             rut: false,
@@ -206,6 +233,7 @@
                                 $("#nropiso").val(paciente.ultimo_examen.nropiso);
                                 $("#nropieza").val(paciente.ultimo_examen.nropieza);
                                 $("#nrocama").val(paciente.ultimo_examen.nrocama);
+                                $("#codubic").val(paciente.ultimo_examen.codubic);
 
                             }
 
@@ -218,6 +246,7 @@
                             $("#nropiso").val(paciente["hosp"].nropiso);
                             $("#nropieza").val(paciente["hosp"].nropieza);
                             $("#nrocama").val(paciente["hosp"].nrocama);
+                            $("#codubic").val(paciente.ultimo_examen.codubic);
 
                             var descserv = paciente["hosp"].descserv || null;
 

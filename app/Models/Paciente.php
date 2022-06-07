@@ -59,7 +59,13 @@ class Paciente extends Model
         'telefono',
         'telefono2',
         'codserv',
-        'descserv'
+        'descserv',
+        'id_ext',
+        'tipo_ext',
+        'codubic',
+        'nropiso',
+        'nropieza',
+        'tipocama',
     ];
 
     /**
@@ -119,7 +125,6 @@ class Paciente extends Model
     {
         return $this->hasMany(\App\Models\Examen::class, 'paciente_id');
     }
-
 
     public function getNombreCompletoAttribute()
     {
