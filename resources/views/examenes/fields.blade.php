@@ -157,8 +157,8 @@
         <input class="form-control" name="hora_de_llamada" type="datetime-local"  id="hora_de_llamada">
     </div>
 
-    <input name="id_ext" type="hidden"  id="id_ext" value="{{ request()->get('id_ext') ?? null }}">
-    <input name="tipo_ext" type="hidden"  id="tipo_ext" value="{{ request()->get('tipo_ext') ?? null }}">
+    <input name="id_ext" type="hidden"  id="id_ext" value="{{ $id_ext ?? null }}">
+    <input name="tipo_ext" type="hidden"  id="tipo_ext" value="{{ $tipo_ext ?? null }}">
 
 </div>
 

@@ -67,6 +67,9 @@ class ExamenController extends AppBaseController
     public function create(Request $request)
     {
 
+        $id_ext = request()->get('id_ext');
+        $tipo_ext = request()->get('tipo_ext');
+
         $clases = ['rutina', 'urgencia'];
 
         foreach ($clases as $index => $clase) {
@@ -85,7 +88,7 @@ class ExamenController extends AppBaseController
         }
 
 
-        return view('examenes.create',compact('grupos'));
+        return view('examenes.create',compact('grupos', 'id_ext','tipo_ext'));
     }
 
     /**
