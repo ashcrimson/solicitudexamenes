@@ -23,6 +23,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|\Carbon\Carbon $fecha_realiza
  * @property string $rutina_urgencia
  * @property string $notas
+ * @property string $id_ext
+ * @property string $tipo_ext
  * @property integer $estado_id
  */
 class Examen extends Model
@@ -30,14 +32,11 @@ class Examen extends Model
     use SoftDeletes;
 
     public $table = 'examenes';
- 
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
-
     protected $dates = ['deleted_at'];
-
-
 
     public $fillable = [
         'paciente_id',
@@ -59,7 +58,9 @@ class Examen extends Model
         'tipocama',
         'codserv',
         'codinst',
-        'descinst'
+        'descinst',
+        'id_ext',
+        'tipo_ext',
     ];
 
     /**

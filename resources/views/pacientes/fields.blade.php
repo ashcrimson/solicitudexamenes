@@ -135,12 +135,14 @@
 
     <div class="form-group col-sm-4">
         {!! Form::label('familiar_responsable', 'Serivicio Solicitante:') !!}
-        <select class="form-control" name="servicio_solicitante">
+        <select class="form-control" name="servicio_solicitante" id="servicio_solicitante">
             <option value="">Seleccione ...</option>
-            <option value="ambulatiorio" @if(isset($examen)) @if(!$examen->descserv || !$examen->codserv) selected @endif @endif >AMBULATORIO</option>
-            <option value="hospitalizado" @if(isset($examen)) @if($examen->descserv || $examen->codserv) selected @endif @endif>HOSPITALIZADO</option>
+            <option value="ambulatiorio">AMBULATORIO</option>
+            <option value="hospitalizado">HOSPITALIZADO</option>
         </select>
     </div>
+
+    <input type="hidden" name="inghosp" id="inghosp">
 
     <div class="form-group col-sm-6">
         <label for="codubic">Ubicación:</label>
@@ -235,6 +237,12 @@
                                 $("#nrocama").val(paciente.ultimo_examen.nrocama);
                                 $("#codubic").val(paciente.ultimo_examen.codubic);
 
+                                if (paciente.ultimo_examen.inghosp) {
+                                    $("#servicio_solicitante").val('hospitalizado');
+                                } else {
+                                    $("#servicio_solicitante").val('ambulatiorio');
+                                }
+
                             }
 
 
@@ -247,6 +255,12 @@
                             $("#nropieza").val(paciente["hosp"].nropieza);
                             $("#nrocama").val(paciente["hosp"].nrocama);
                             $("#codubic").val(paciente.ultimo_examen.codubic);
+
+                            if (paciente.ultimo_examen.inghosp) {
+                                $("#servicio_solicitante").val('hospitalizado');
+                            } else {
+                                $("#servicio_solicitante").val('ambulatiorio');
+                            }
 
                             var descserv = paciente["hosp"].descserv || null;
 

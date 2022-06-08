@@ -14,8 +14,6 @@ class AddFieldsToPacientesTable extends Migration
     public function up()
     {
         Schema::table('pacientes', function (Blueprint $table) {
-            $table->string('id_ext')->nullable();
-            $table->string('tipo_ext')->nullable();
             $table->string('codubic')->nullable();
             $table->string('nropiso')->nullable();
             $table->string('nropieza')->nullable();
@@ -31,8 +29,6 @@ class AddFieldsToPacientesTable extends Migration
     public function down()
     {
         Schema::table('pacientes', function (Blueprint $table) {
-            $table->dropColumn('id_ext');
-            $table->dropColumn('tipo_ext');
             $table->dropColumn('codubic');
             $table->dropColumn('nropiso');
             $table->dropColumn('nropieza');

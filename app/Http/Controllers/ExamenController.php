@@ -288,8 +288,18 @@ class ExamenController extends AppBaseController
         try {
             DB::beginTransaction();
 
+            $estadoExamen = null;
+
+            if ($examen->estado_id == ExamenEstado::INGRESADO) {
+                $estadoExamen = ExamenEstado::ANULADO;
+            } else if ($examen->estado_id == ExamenEstado::SOLICITADO) {
+                $estadoExamen = ExamenEstado::ELIMINADO;
+            } else {
+
+            }
+
             $examen->fill([
-                'estado_id' => ExamenEstado::ELIMINADO,
+                'estado_id' => $estadoExamen,
             ]);
             $examen->save();
 

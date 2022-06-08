@@ -60,8 +60,6 @@ class Paciente extends Model
         'telefono2',
         'codserv',
         'descserv',
-        'id_ext',
-        'tipo_ext',
         'codubic',
         'nropiso',
         'nropieza',
