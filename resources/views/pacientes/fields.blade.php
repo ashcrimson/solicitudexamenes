@@ -226,9 +226,9 @@
 
                         if(typeof paciente["hosp"] === 'undefined'){
 
-                            if (typeof paciente.ultimo_examen === 'undefined'){
-                                alertWarning('Paciente no hospitalizado');
-                            }else {
+                            // if (typeof paciente.ultimo_examen === 'undefined'){
+                            //     alertWarning('Paciente no hospitalizado');
+                            // }else {
 
                                 $("#codserv").val(paciente.ultimo_examen.codserv);
                                 $("#descserv").val(paciente.ultimo_examen.descserv);
@@ -243,7 +243,7 @@
                                     $("#servicio_solicitante").val('ambulatiorio');
                                 }
 
-                            }
+                            // }
 
 
                         }else {
@@ -265,9 +265,9 @@
                             var descserv = paciente["hosp"].descserv || null;
 
 
-                            if (!descserv){
-                                alertWarning('Paciente no hospitalizado');
-                            }
+                            // if (!descserv){
+                            //     alertWarning('Paciente no hospitalizado');
+                            // }
                         }
 
                         if (paciente.sexo=='M'){
