@@ -295,7 +295,7 @@ class ExamenController extends AppBaseController
             } else if ($examen->estado_id == ExamenEstado::SOLICITADO) {
                 $estadoExamen = ExamenEstado::ELIMINADO;
             } else {
-
+                $estadoExamen = ExamenEstado::ANULADO;
             }
 
             $examen->fill([
