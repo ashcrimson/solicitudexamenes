@@ -299,7 +299,7 @@
 
                 }catch (e) {
                     logW(e);
-                    alertWarning('Rut No Encontrado');
+                    // alertWarning('Rut No Encontrado');
                     this.loading = false;
                 }
             },
