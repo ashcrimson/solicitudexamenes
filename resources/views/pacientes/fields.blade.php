@@ -214,7 +214,7 @@
                     logI('respuesta',res);
 
                     if (!paciente){
-                        alertWarning('Rut No Encontrado');
+                        // alertWarning('Rut No Encontrado');
                     }else{
                         $("#dv_run").val(paciente.dv_run);
                         $("#apellido_paterno").val(paciente.apellido_paterno);
