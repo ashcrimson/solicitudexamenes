@@ -67,8 +67,8 @@ class ExamenController extends AppBaseController
     public function create(Request $request)
     {
 
-        $id_ext = request()->get('id_ext');
-        $tipo_ext = request()->get('tipo_ext');
+        $id_ext = $request->get('id_ext');
+        $tipo_ext = $request->get('tipo_ext');
 
         $clases = ['rutina', 'urgencia'];
 
