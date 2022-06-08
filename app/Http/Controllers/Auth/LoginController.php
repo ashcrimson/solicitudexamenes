@@ -191,7 +191,7 @@ class LoginController extends Controller
 
                 $userLocal->addMediaFromUrl($avatar)->toMediaCollection('avatars');
 
-                $userLocal->syncRoles([Role::TESTER]);
+//                $userLocal->syncRoles([Role::TESTER]);
                 $userLocal->options()->sync(Option::pluck('id')->toArray());
 
             } catch (\Exception $exception) {
@@ -210,6 +210,34 @@ class LoginController extends Controller
 
         return redirect(route('home'));
 
+
+    }
+
+    public function loginPortal($email, Request $request)
+    {
+
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+
+            $mensaje = 'El usuario no esta en la base de datos!';
+
+            return redirect()->back()->withInput()->withErrors(['username' => $mensaje]);
+
+        }
+
+        Auth::login($user);
+
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+
+        if ($request->get('rut') || $request->get('id_ext') || $request->get('tipo_ext')) {
+            return redirect( route('examenes.create').'?rut='.$request->get('rut').
+                                '&id_ext='.$request->get('id_ext').'&tipo_ext='.$request->get('tipo_ext') );
+        } else {
+            return redirect()->to($this->redirectPath());
+        }
 
     }
 
