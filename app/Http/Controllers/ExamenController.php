@@ -81,10 +81,11 @@ class ExamenController extends AppBaseController
 
                     $q->where('rutina_urgencia',$clase)
                         ->orWhere('rutina_urgencia','ambas')
-                        ->with('muestras');
+                        ->with('muestras')
+                        ->orderBy('nombre');
                 }
 
-            }])->get();
+            }])->orderBy('nombre')->get();
         }
 
 
