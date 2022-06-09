@@ -64,6 +64,8 @@ class Paciente extends Model
         'nropiso',
         'nropieza',
         'tipocama',
+        'numero_documento',
+        'documento_tipo_id',
     ];
 
     /**

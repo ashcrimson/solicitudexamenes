@@ -2,20 +2,11 @@
 
     <div class="form-group col-sm-12">
 
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="hidden" name="rut" value="0" >
-            <input type="radio" class="custom-control-input" v-model="rut" name="rut" id="rut" value="1" >
-            <label class="custom-control-label" for="rut" >
-                RUT
-            </label>
-        </div>
-
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="hidden" name="otro_doc" value="0" >
-            <input type="radio" class="custom-control-input" v-model="otro_doc" name="otro_doc" id="otro_doc" value="1" >
-            <label class="custom-control-label" for="otro_doc" >
-                OTRO
-            </label>
+        <div class="form-group col-sm-3">
+            {!! Form::label('documento_tipo', 'Documento Tipo:') !!}
+            <multiselect v-model="documentoTipo" :options="documentoTipos" label="nombre" placeholder="Seleccione uno...">
+            </multiselect>
+            <input type="hidden" name="documento_tipo_id" :value="documentoTipo ? documentoTipo.id : null">
         </div>
 
     </div>
@@ -190,6 +181,9 @@
 
             rut: false,
             otro_doc: false,
+
+            documentoTipos: @json(\App\Models\DocumentoTipo::all() ?? []),
+            documentoTipo: @json(\App\Models\DocumentoTipo::where('id', old('documento_tipo_id', $examen->paciente->documento_tipo_id))->first() ?? $examen->paciente->documento_tipo_id ?? null)
         },
         methods: {
             async getDatosPaciente(){
@@ -312,20 +306,32 @@
         },
         computed: {
             ocultarBotonBuscar() {
-                if (!this.rut) {
-                    return false;
-                } else {
-                    return true;
+                if (this.documentoTipo) {
+                    if (this.documentoTipo.id == 1) {
+                        return false;
+                    } else if (this.documentoTipo.id == 2) {
+                        return true;
+                    } else if (this.documentoTipo.id == 3) {
+                        return false;
+                    } else if (this.documentoTipo.id == 4) {
+                        return false;
+                    }
                 }
                 return false;
             },
             tituloSegunTipoDocumento() {
-                if (!this.rut) {
-                    return 'Numero identificación';
-                } else {
-                    return 'RUN';
+                if (this.documentoTipo) {
+                    if (this.documentoTipo.id == 1) {
+                        return 'NN';
+                    } else if (this.documentoTipo.id == 2) {
+                        return 'RUT';
+                    } else if (this.documentoTipo.id == 3) {
+                        return 'PASAPORTE';
+                    } else if (this.documentoTipo.id == 4) {
+                        return 'RECIEN NACIDO';
+                    }
                 }
-                return 'Numero identificación';
+                return 'NN';
             },
         },
         watch:{

@@ -322,12 +322,14 @@ class ExamenController extends AppBaseController
 
     public function creaOactualizaPaciente($request)
     {
+
         $paciente = Paciente::updateOrCreate([
             'run' => $request->run,
-            'dv_run' => $request->dv_run,
+//            'dv_run' => $request->dv_run,
 
         ],[
-            'run' => $request->run,
+            'run' => $request->documento_tipo_id == 2 ? $request->run : null,
+            'numero_documento'  => $request->documento_tipo_id != 2 ? $request->run : null,
             'fecha_nac' => $request->fecha_nac,
             'dv_run' => $request->dv_run,
             'apellido_paterno' => $request->apellido_paterno,
@@ -344,6 +346,11 @@ class ExamenController extends AppBaseController
             'prevision_id' => $request->prevision_id,
             'clave' => $request->clave,
             'movil_envia' => $request->movil_envia,
+            'codubic' => $request->codubic,
+            'nropiso'  => $request->nropiso,
+            'nropieza'  => $request->nropieza,
+            'tipocama'  => $request->tipocama,
+            'documento_tipo_id'  => $request->documento_tipo_id,
 
         ]);
 
@@ -353,7 +360,7 @@ class ExamenController extends AppBaseController
     public function addAttributos(Examen $examen)
     {
 
-        $examen->setAttribute("run" ,$examen->paciente->run);
+        $examen->setAttribute("run" ,$examen->paciente->run ?? $examen->paciente->numero_documento);
         $examen->setAttribute("dv_run" ,$examen->paciente->dv_run);
         $examen->setAttribute("apellido_paterno" ,$examen->paciente->apellido_paterno);
         $examen->setAttribute("apellido_materno" ,$examen->paciente->apellido_materno);
