@@ -183,7 +183,7 @@
             otro_doc: false,
 
             documentoTipos: @json(\App\Models\DocumentoTipo::all() ?? []),
-            documentoTipo: @json(\App\Models\DocumentoTipo::where('id', old('documento_tipo_id', $examen->paciente->documento_tipo_id))->first() ?? $examen->paciente->documento_tipo_id ?? null)
+            documentoTipo: @json(\App\Models\DocumentoTipo::where('id', old('documento_tipo_id', $examen->paciente->documento_tipo_id ?? null))->first() ?? null)
         },
         methods: {
             async getDatosPaciente(){

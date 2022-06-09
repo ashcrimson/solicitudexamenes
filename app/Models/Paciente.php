@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $familiar_responsable
  * @property string $telefono
  * @property string $telefono2
+ * @property integer $documento_tipo_id
  */
 class Paciente extends Model
 {

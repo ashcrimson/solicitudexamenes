@@ -186,6 +186,8 @@ class ExamenController extends AppBaseController
 
         $examen = $this->addAttributos($examen);
 
+//        return $examen;
+
         $clases = ['rutina', 'urgencia'];
 
         foreach ($clases as $index => $clase) {
@@ -373,7 +375,7 @@ class ExamenController extends AppBaseController
         $examen->setAttribute("familiar_responsable" ,$examen->paciente->familiar_responsable);
         $examen->setAttribute("telefono" ,$examen->paciente->telefono);
         $examen->setAttribute("telefono2" ,$examen->paciente->telefono2);
-
+        $examen->setAttribute("documento_tipo_id" ,$examen->paciente->documento_tipo_id);
 
         return $examen;
     }
