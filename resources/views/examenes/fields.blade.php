@@ -73,7 +73,7 @@
 
 <div id="fieldsExamen" class="form-row">
 
-    <div class="form-group col-sm-12">
+    <div class="form-group col-sm-12" style="font-size: 15px;">
         <label for="">Seleccione una opción</label>
         <br>
         <div class="custom-control custom-radio custom-control-inline">
