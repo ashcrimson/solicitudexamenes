@@ -88,6 +88,9 @@
 
     <br>
 
+    <div class="form-group col-sm-12 " v-if="gruposFiltrados.length != 0">
+        <input class="form-control" type="text" v-model="searchQuery" placeholder="Ingrese Código o Descripcción para la busqueda...">
+    </div>
 
     <div class="form-group col-sm-4 " v-for="grupo in gruposFiltrados">
         <div class="card muestras" >
@@ -124,7 +127,6 @@
                                 </option>
                             </select>
                         </td>
-
                     </tr>
 
                 </tbody>
@@ -173,9 +175,12 @@
         data: {
             clase : @json($examen->rutina_urgencia ?? ''),
             grupos : @json($grupos ?? []),
+            gruposRespaldo : @json($grupos ?? []),
             tiposSeleccionados : @json(isset($examen) ? $examen->tipos->pluck('id')->toArray() : []),//
 
             diagnostico : @json($examen->diagnostico ?? null),
+
+            searchQuery: null,
         },
         methods: {
 
@@ -188,7 +193,19 @@
                 }
 
                 return [];
-            }
+            },
+            resultQuery() {
+                if (this.searchQuery) {
+                    return this.grupos[this.clase].filter( (grupo) => {
+                        // return grupo.tipos.filter( (tipo) => {
+                        console.log(grupo.tipos.findIndex(t => t.codigo != this.searchQuery))
+                        grupo.tipos.splice(grupo.tipos.findIndex(t => t.codigo != this.searchQuery), 1);
+                        // });
+                    });
+                } else {
+                    return this.grupos[this.clase];
+                }
+            },
         }
 
 
