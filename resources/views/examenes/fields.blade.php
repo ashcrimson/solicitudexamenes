@@ -106,7 +106,7 @@
                 </thead>
                 <tbody>
 
-                    <tr v-for="tipo in grupo.tipos">
+                    <tr v-for="tipo in grupo.tipos" v-show="tiposFiltrados.includes(tipo.simple_text)">
                         <td>
 
                             <div style="font-size: 10px;">
@@ -115,8 +115,8 @@
                                     v-model="tiposSeleccionados"
                                 >
 
-                                <label :for="'tipo'+tipo.id">
-                                    <span v-text="tipo.codigo"></span> - <span v-text="tipo.nombre"></span>
+                                <label :for="'tipo'+tipo.id" >
+                                    <span v-text="tipo.simple_text"></span>
                                 </label>
                             </div>
                         </td>
@@ -180,7 +180,7 @@
 
             diagnostico : @json($examen->diagnostico ?? null),
 
-            searchQuery: null,
+            searchQuery: '',
         },
         methods: {
 
@@ -194,18 +194,26 @@
 
                 return [];
             },
-            resultQuery() {
-                if (this.searchQuery) {
-                    return this.grupos[this.clase].filter( (grupo) => {
-                        // return grupo.tipos.filter( (tipo) => {
-                        console.log(grupo.tipos.findIndex(t => t.codigo != this.searchQuery))
-                        grupo.tipos.splice(grupo.tipos.findIndex(t => t.codigo != this.searchQuery), 1);
-                        // });
-                    });
-                } else {
-                    return this.grupos[this.clase];
-                }
+            todosLosTipos(){
+                let todos = [];
+                this.gruposFiltrados.forEach(function (grupo){
+                    grupo.tipos.forEach(function (tipo) {
+                        todos.push(tipo.simple_text);
+                    })
+
+                })
+
+                return todos;
             },
+            tiposFiltrados(){
+                if(this.searchQuery){
+                    return this.todosLosTipos.filter((item)=>{
+                        return this.searchQuery.toLowerCase().split(' ').every(v => item.toLowerCase().includes(v))
+                    })
+                }else{
+                    return this.todosLosTipos;
+                }
+            }
         }
 
 

@@ -30,6 +30,7 @@ class ExamenTipo extends Model
     protected $dates = ['deleted_at'];
 
 
+    protected $appends = ['simple_text'];
 
     public $fillable = [
         'grupo_id',
@@ -90,6 +91,10 @@ class ExamenTipo extends Model
         return $this->belongsToMany(\App\Models\Examen::class, 'tipos_has_examen','examen_id','tipo_id');
     }
 
+    public function getSimpleTextAttribute()
+    {
+        return $this->codigo." - ".$this->nombre;
+    }
     public function getTextAttribute()
     {
         return $this->codigo." / ".$this->nombre." (".$this->grupo->nombre.")";
