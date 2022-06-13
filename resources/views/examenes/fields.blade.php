@@ -184,7 +184,6 @@
         },
         methods: {
             tooltipMostrar(codigo) {
-                console.log(codigo);
                 if (codigo == 306992) {
                     return '-Influenza A, AH 1, A H3, -Influenza B, -Virus respiratorio sincicial A, B - Parainfluenza 1,' +
                         '2, 3,4 - Coronaviruz 229E, NL63, OC43, HKU1 - Metapneumovirus humano - Rhinovirus humano - Adenovirus' +
