@@ -116,7 +116,7 @@
                                 >
 
                                 <label :for="'tipo'+tipo.id" >
-                                    <span v-text="tipo.simple_text"></span>
+                                    <span v-text="tipo.simple_text" :title="tooltipMostrar(tipo.codigo)"></span>
                                 </label>
                             </div>
                         </td>
@@ -183,8 +183,18 @@
             searchQuery: '',
         },
         methods: {
-
-
+            tooltipMostrar(codigo) {
+                console.log(codigo);
+                if (codigo == 306992) {
+                    return '-Influenza A, AH 1, A H3, -Influenza B, -Virus respiratorio sincicial A, B - Parainfluenza 1,' +
+                        '2, 3,4 - Coronaviruz 229E, NL63, OC43, HKU1 - Metapneumovirus humano - Rhinovirus humano - Adenovirus' +
+                        'Bocavirus humano - Chlamydophila pneumoniae - Legionella pneumophila - Mycoplasma pneumoniea';
+                } else if (codigo == 306995) {
+                    return 'Adenovirus, Citomegalovirus, Virus Epstein, Barr, Virus herpes simplex 1 y 2, Virus Varicella,' +
+                        'Zoster, Enterovirus, Oarechovirus, Virus Herpes 6 y 7, Parvovirus B19';
+                }
+                return null;
+            }
         },
         computed:{
             gruposFiltrados(){
@@ -213,10 +223,8 @@
                 }else{
                     return this.todosLosTipos;
                 }
-            }
+            },
         }
-
-
     });
 </script>
 @endpush
