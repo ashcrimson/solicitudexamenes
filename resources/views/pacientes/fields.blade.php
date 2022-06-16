@@ -125,8 +125,8 @@
  -->
 
     <div class="form-group col-sm-4">
-        {!! Form::label('familiar_responsable', 'Serivicio Solicitante:') !!}
-        <select class="form-control" name="servicio_solicitante" id="servicio_solicitante">
+        {!! Form::label('tipo_solicitud', 'Tipo Solicitud:') !!}
+        <select class="form-control" name="tipo_solicitud" id="tipo_solicitud">
             <option value="">Seleccione ...</option>
             <option value="ambulatiorio">AMBULATORIO</option>
             <option value="hospitalizado">HOSPITALIZADO</option>
@@ -232,9 +232,9 @@
                                 $("#codubic").val(paciente.ultimo_examen.codubic);
 
                                 if (paciente.ultimo_examen.inghosp) {
-                                    $("#servicio_solicitante").val('hospitalizado');
+                                    $("#tipo_solicitud").val('hospitalizado');
                                 } else {
-                                    $("#servicio_solicitante").val('ambulatiorio');
+                                    $("#tipo_solicitud").val('ambulatiorio');
                                 }
 
                             // }
@@ -251,9 +251,9 @@
                             $("#codubic").val(paciente.ultimo_examen.codubic);
 
                             if (paciente.ultimo_examen.inghosp) {
-                                $("#servicio_solicitante").val('hospitalizado');
+                                $("#tipo_solicitud").val('hospitalizado');
                             } else {
-                                $("#servicio_solicitante").val('ambulatiorio');
+                                $("#tipo_solicitud").val('ambulatiorio');
                             }
 
                             var descserv = paciente["hosp"].descserv || null;
