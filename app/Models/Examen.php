@@ -61,6 +61,7 @@ class Examen extends Model
         'descinst',
         'id_ext',
         'tipo_ext',
+        'servicio_solicitante',
     ];
 
     /**
