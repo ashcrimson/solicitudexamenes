@@ -1,6 +1,6 @@
 <div class="form-row" id="paciente-fields">
 
-    <div class="form-group col-sm-12">
+    
 
         <div class="form-group col-sm-3">
             {!! Form::label('documento_tipo', 'Documento Tipo:') !!}
@@ -9,7 +9,7 @@
             <input type="hidden" name="documento_tipo_id" :value="documentoTipo ? documentoTipo.id : null">
         </div>
 
-    </div>
+    
 
     <!-- Run Field -->
     <div class="form-group col-sm-4">
@@ -100,19 +100,19 @@
     </div>
 
     <!-- Direccion Field -->
-    <div class="form-group col-sm-12">
+    <!-- <div class="form-group col-sm-12">
         {!! Form::label('direccion', 'Dirección:') !!}
         {!! Form::text('direccion', null, ['id' => 'direccion','class' => 'form-control','maxlength' => 255]) !!}
-    </div>
+    </div> -->
 
        <!-- Desc Servicio Field -->
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-3">
         {!! Form::label('descserv', 'Descripción Servicio:') !!}
         {!! Form::text('descserv', null, ['id' => 'descserv','class' => 'form-control','maxlength' => 255]) !!}
     </div>
 
        <!-- Desc Servicio Field -->
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-3">
         {!! Form::label('codserv', 'Código Servicio:') !!}
         {!! Form::text('codserv', null, ['id' => 'codserv','class' => 'form-control','maxlength' => 255]) !!}
     </div>
@@ -124,7 +124,7 @@
     </div>
  -->
 
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-3">
         {!! Form::label('tipo_solicitud', 'Tipo Solicitud:') !!}
         <select class="form-control" name="tipo_solicitud" id="tipo_solicitud">
             <option value="">Seleccione ...</option>
@@ -135,7 +135,7 @@
 
     <input type="hidden" name="inghosp" id="inghosp">
 
-    <div class="form-group col-sm-6">
+    <div class="form-group col-sm-3">
         <label for="codubic">Ubicación:</label>
         {!! Form::text('codubic', null, ['id' => 'codubic','class' => 'form-control','maxlength' => 255]) !!}
     </div>
