@@ -1,4 +1,4 @@
-<div class="form-row" id="paciente-fields">
+<div class="row" id="paciente-fields">
 
     <div class="form-group col-sm-12">
 
@@ -49,72 +49,94 @@
     <div class="form-group col-sm-12" style="padding: 0px; margin: 0px"></div>
 
     <!-- Primer Nombre Field -->
-    <div class="form-group col-sm-3">
-        {!! Form::label('primer_nombre', 'Primer Nombre:') !!}
-        {!! Form::text('primer_nombre', null, ['id' => 'primer_nombre','class' => 'form-control','maxlength' => 255]) !!}
+    <div class="form-group row col-sm-6">
+        {!! Form::label('primer_nombre', 'Nombres:', ['class' => 'col-sm-2']) !!}
+        <div class="col-sm-5">
+            {!! Form::text('primer_nombre', null, ['id' => 'primer_nombre','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
+        <div class="col-sm-5">
+            {!! Form::text('segundo_nombre', null, ['id' => 'segundo_nombre','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
     </div>
 
-    <!-- Segundo Nombre Field -->
-    <div class="form-group col-sm-3">
-        {!! Form::label('segundo_nombre', 'Segundo Nombre:') !!}
-        {!! Form::text('segundo_nombre', null, ['id' => 'segundo_nombre','class' => 'form-control','maxlength' => 255]) !!}
+{{--    <!-- Segundo Nombre Field -->--}}
+{{--    <div class="form-group col-sm-3">--}}
+{{--        {!! Form::label('segundo_nombre', 'Segundo Nombre:') !!}--}}
+{{--        {!! Form::text('segundo_nombre', null, ['id' => 'segundo_nombre','class' => 'form-control','maxlength' => 255]) !!}--}}
+{{--    </div>--}}
+
+    <!-- Fecha Nac Field -->
+    <div class="form-group row col-sm-6">
+        {!! Form::label('fecha_nac', 'Fecha Nac:', ['class' => 'col-sm-2']) !!}
+        <div class="col-sm-10">
+            {!! Form::date('fecha_nac', null, ['v-model' => 'fecha_nac','id' => 'fecha_nac','class' => 'form-control','id'=>'fecha_nac']) !!}
+        </div>
     </div>
 
     <!-- Apellido Paterno Field -->
-    <div class="form-group col-sm-3">
-        {!! Form::label('apellido_paterno', 'Apellido Paterno:') !!}
-        {!! Form::text('apellido_paterno', null, ['id' => 'apellido_paterno','class' => 'form-control','maxlength' => 255]) !!}
+    <div class="form-group row col-sm-6">
+        {!! Form::label('apellido_paterno', 'Apellidos:', ['class' => 'col-sm-2']) !!}
+        <div class="col-sm-5">
+            {!! Form::text('apellido_paterno', null, ['id' => 'apellido_paterno','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
+        <div class="col-sm-5">
+            {!! Form::text('apellido_materno', null, ['id' => 'apellido_materno','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
     </div>
 
-    <!-- Apellido Materno Field -->
-    <div class="form-group col-sm-3">
-        {!! Form::label('apellido_materno', 'Apellido Materno:') !!}
-        {!! Form::text('apellido_materno', null, ['id' => 'apellido_materno','class' => 'form-control','maxlength' => 255]) !!}
+{{--    <!-- Apellido Materno Field -->--}}
+{{--    <div class="form-group col-sm-3">--}}
+{{--        {!! Form::label('apellido_materno', 'Apellido Materno:') !!}--}}
+{{--        {!! Form::text('apellido_materno', null, ['id' => 'apellido_materno','class' => 'form-control','maxlength' => 255]) !!}--}}
+{{--    </div>--}}
+
+    <div class="form-group row col-sm-6">
+        {!! Form::label('sexo', 'Sexo:', ['class' => 'col-sm-2']) !!}<br>
+        <div class="col-sm-10">
+            <input type="checkbox" data-toggle="toggle" data-size="normal" data-on="M" data-off="F" data-style="ios" name="sexo" id="sexo"
+                   value="1"
+                {{($rema->sexo ?? null)=="M" || ($paciente->sexo ?? $examen->paciente->sexo ?? null)=="M"  ? 'checked' : '' }}>
+        </div>
     </div>
-
-    <!-- Fecha Nac Field -->
-    <div class="form-group col-sm-3">
-        {!! Form::label('fecha_nac', 'Fecha Nac:') !!}
-        {!! Form::date('fecha_nac', null, ['v-model' => 'fecha_nac','id' => 'fecha_nac','class' => 'form-control','id'=>'fecha_nac']) !!}
-    </div>
-
-
-    <div class="form-group col-sm-3">
-        <label for="">Edad</label>
-        <input type="text" class="form-control" readonly v-model="edad" value="0">
-    </div>
-
-    <div class="form-group col-sm-3">
-        {!! Form::label('sexo', 'Sexo:') !!}<br>
-        <input type="checkbox" data-toggle="toggle" data-size="normal" data-on="M" data-off="F" data-style="ios" name="sexo" id="sexo"
-               value="1"
-            {{($rema->sexo ?? null)=="M" || ($paciente->sexo ?? $examen->paciente->sexo ?? null)=="M"  ? 'checked' : '' }}>
-    </div>
-
-
 
     <!-- telefono Field -->
-    <div class="form-group col-sm-3">
-        {!! Form::label('telefono', 'Telefono:') !!}
-        {!! Form::text('telefono', null, ['id' => 'telefono','class' => 'form-control','maxlength' => 255]) !!}
+    <div class="form-group row col-sm-6">
+        {!! Form::label('telefono', 'Telefono:', ['class' => 'col-sm-2']) !!}
+        <div class="col-sm-10">
+            {!! Form::text('telefono', null, ['id' => 'telefono','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
+    </div>
+
+
+    <div class="form-group row col-sm-6">
+        <label class="col-sm-2">Edad</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" readonly v-model="edad" value="0">
+        </div>
     </div>
 
     <!-- Direccion Field -->
-    <div class="form-group col-sm-12">
-        {!! Form::label('direccion', 'Dirección:') !!}
-        {!! Form::text('direccion', null, ['id' => 'direccion','class' => 'form-control','maxlength' => 255]) !!}
+    <div class="form-group row col-sm-6">
+        {!! Form::label('direccion', 'Dirección:', ['class' => 'col-sm-2']) !!}
+        <div class="col-sm-10">
+            {!! Form::text('direccion', null, ['id' => 'direccion','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
     </div>
 
        <!-- Desc Servicio Field -->
-    <div class="form-group col-sm-4">
-        {!! Form::label('descserv', 'Descripción Servicio:') !!}
-        {!! Form::text('descserv', null, ['id' => 'descserv','class' => 'form-control','maxlength' => 255]) !!}
+    <div class="form-group row col-sm-6">
+        {!! Form::label('descserv', 'Descripción Servicio:', ['class' => 'col-sm-2']) !!}
+        <div class="col-sm-10">
+            {!! Form::text('descserv', null, ['id' => 'descserv','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
     </div>
 
        <!-- Desc Servicio Field -->
-    <div class="form-group col-sm-4">
-        {!! Form::label('codserv', 'Código Servicio:') !!}
-        {!! Form::text('codserv', null, ['id' => 'codserv','class' => 'form-control','maxlength' => 255]) !!}
+    <div class="form-group row col-sm-6">
+        {!! Form::label('codserv', 'Código Servicio:', ['class' => 'col-sm-2']) !!}
+        <div class="col-sm-10">
+            {!! Form::text('codserv', null, ['id' => 'codserv','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
     </div>
 
     <!-- familiar_responsable Field -->
@@ -124,35 +146,45 @@
     </div>
  -->
 
-    <div class="form-group col-sm-4">
-        {!! Form::label('tipo_solicitud', 'Tipo Solicitud:') !!}
-        <select class="form-control" name="tipo_solicitud" id="tipo_solicitud">
-            <option value="">Seleccione ...</option>
-            <option value="ambulatiorio">AMBULATORIO</option>
-            <option value="hospitalizado">HOSPITALIZADO</option>
-        </select>
+    <div class="form-group row col-sm-6">
+        {!! Form::label('tipo_solicitud', 'Tipo Solicitud:', ['class' => 'col-sm-2']) !!}
+        <div class="col-sm-10">
+            <select class="form-control" name="tipo_solicitud" id="tipo_solicitud">
+                <option value="">Seleccione ...</option>
+                <option value="ambulatiorio">AMBULATORIO</option>
+                <option value="hospitalizado">HOSPITALIZADO</option>
+            </select>
+        </div>
     </div>
 
     <input type="hidden" name="inghosp" id="inghosp">
 
-    <div class="form-group col-sm-6">
-        <label for="codubic">Ubicación:</label>
-        {!! Form::text('codubic', null, ['id' => 'codubic','class' => 'form-control','maxlength' => 255]) !!}
+    <div class="form-group row col-sm-6">
+        <label class="col-sm-2">Ubicación:</label>
+        <div class="col-sm-10">
+            {!! Form::text('codubic', null, ['id' => 'codubic','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
     </div>
 
-    <div class="form-group col-sm-3">
-        <label for="nropiso">Piso:</label>
-        {!! Form::text('nropiso', null, ['id' => 'nropiso','class' => 'form-control','maxlength' => 255]) !!}
+    <div class="form-group row col-sm-6">
+        <label class="col-sm-2">Piso:</label>
+        <div class="col-sm-10">
+            {!! Form::text('nropiso', null, ['id' => 'nropiso','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
     </div>
 
-    <div class="form-group col-sm-3">
-        <label for="nropieza">Pieza:</label>
-        {!! Form::text('nropieza', null, ['id' => 'nropieza','class' => 'form-control','maxlength' => 255]) !!}
+    <div class="form-group row col-sm-6">
+        <label class="col-sm-2" for="nropieza">Pieza:</label>
+        <div class="col-sm-10">
+            {!! Form::text('nropieza', null, ['id' => 'nropieza','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
     </div>
 
-    <div class="form-group col-sm-4">
-        <label for="tipocama">Cama:</label>
-        {!! Form::text('tipocama', null, ['id' => 'tipocama','class' => 'form-control','maxlength' => 255]) !!}
+    <div class="form-group row col-sm-6">
+        <label class="col-sm-2" for="tipocama">Cama:</label>
+        <div class="col-sm-10">
+            {!! Form::text('tipocama', null, ['id' => 'tipocama','class' => 'form-control','maxlength' => 255]) !!}
+        </div>
     </div>
 
 </div>
