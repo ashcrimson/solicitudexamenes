@@ -3,7 +3,7 @@
     <div class="form-group col-sm-12">
 
         <div class="form-group col-sm-3">
-            {!! Form::label('documento_tipo', 'Documento Tipo:') !!}
+            {!! Form::label('documento_tipo', 'Tipo de Documento:') !!}
             <multiselect v-model="documentoTipo" :options="documentoTipos" label="nombre" placeholder="Seleccione uno...">
             </multiselect>
             <input type="hidden" name="documento_tipo_id" :value="documentoTipo ? documentoTipo.id : null">
@@ -215,7 +215,7 @@
             otro_doc: false,
 
             documentoTipos: @json(\App\Models\DocumentoTipo::all() ?? []),
-            documentoTipo: @json(\App\Models\DocumentoTipo::where('id', old('documento_tipo_id', $examen->paciente->documento_tipo_id ?? null))->first() ?? null)
+            documentoTipo: @json(\App\Models\DocumentoTipo::where('id', old('documento_tipo_id', $examen->paciente->documento_tipo_id ?? 2 ?? null))->first() ?? null)
         },
         methods: {
             async getDatosPaciente(){
