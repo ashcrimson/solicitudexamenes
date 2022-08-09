@@ -296,6 +296,19 @@
                             // }
                         }
 
+                        $("#codserv").val(paciente.ultimo_examen.codserv);
+                        $("#descserv").val(paciente.ultimo_examen.descserv);
+                        $("#nropiso").val(paciente.ultimo_examen.nropiso);
+                        $("#nropieza").val(paciente.ultimo_examen.nropieza);
+                        $("#nrocama").val(paciente.ultimo_examen.nrocama);
+                        $("#codubic").val(paciente.ultimo_examen.codubic);
+
+                        if (paciente.ultimo_examen.inghosp) {
+                            $("#tipo_solicitud").val('hospitalizado');
+                        } else {
+                            $("#tipo_solicitud").val('ambulatiorio');
+                        }
+
                         if (paciente.sexo=='M'){
                             $('#sexo').bootstrapToggle('on')
                         }else {
