@@ -112,7 +112,7 @@ class ExamenDataTable extends DataTable
                 ->searchable(false)->orderable(false),
             Column::make('diagnostico')->name('diagnostico.nombre')->data('diagnostico.nombre'),
             Column::make('Medico')->name('userSolicita.name')->data('user_solicita.name'),
-            Column::make('muestras'),
+            Column::make('muestras')->orderable(false)->searchable(false),
             Column::make('rutina_urgencia'),
             Column::make('estado')->data('estado.nombre')->name('estado.nombre'),
 
